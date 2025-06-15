@@ -262,55 +262,53 @@ export const Workbench: React.FC = () => {
               Choose quote
             </div>
             {/* Quotes */}
-            <div className="flex flex-col gap-3">
-              {fourMessages.map(
-                (msg, idx) =>
-                  msg && (
-                    <button
-                      type="button"
-                      key={idx}
-                      className={`
-                        relative
-                        bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border shadow-lg transition
-                        min-h-[68px] min-w-full h-[68px] flex items-center justify-center text-center
-                        ${imprintedQuote === msg
-                          ? "border-green-500 ring-2 ring-green-400 ring-offset-2 scale-[1.04] bg-primary/10 shadow-green-100/60"
-                          : "border-white/60 hover:bg-white/100 hover:shadow-2xl"}
-                      `}
-                      style={{
-                        boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
-                        cursor: "pointer",
-                        minHeight: "68px",
-                        minWidth: "100%",
-                        height: "68px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        whiteSpace: "normal",
-                        position: "relative",
-                      }}
-                      onClick={() => setImprintedQuote(msg)}
-                      aria-pressed={imprintedQuote === msg}
-                    >
-                      {imprintedQuote === msg && (
-                        <span
-                          className="absolute top-2 right-3 bg-white rounded-full border border-green-400 p-0.5 shadow-md"
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                          aria-label="Selected"
-                        >
-                          <Check size={16} color="#16a34a" strokeWidth={2.5} />
-                        </span>
-                      )}
-                      {msg}
-                    </button>
-                  )
-              )}
-            </div>
+            {fourMessages.map(
+              (msg, idx) =>
+                msg && (
+                  <button
+                    type="button"
+                    key={idx}
+                    className={`
+                      relative
+                      bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border shadow-lg transition
+                      min-h-[68px] min-w-full h-[68px] flex items-center justify-center text-center
+                      ${imprintedQuote === msg
+                        ? "border-green-500 ring-2 ring-green-400 ring-offset-2 scale-[1.04] bg-primary/10 shadow-green-100/60"
+                        : "border-white/60 hover:bg-white/100 hover:shadow-2xl"}
+                    `}
+                    style={{
+                      boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
+                      cursor: "pointer",
+                      minHeight: "68px",
+                      minWidth: "100%",
+                      height: "68px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      whiteSpace: "normal",
+                      position: "relative",
+                    }}
+                    onClick={() => setImprintedQuote(msg)}
+                    aria-pressed={imprintedQuote === msg}
+                  >
+                    {imprintedQuote === msg && (
+                      <span
+                        className="absolute top-1.5 right-2 bg-white rounded-full border border-green-400 p-0.5 shadow-sm"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        aria-label="Selected"
+                      >
+                        <Check size={13} color="#16a34a" strokeWidth={2.5} />
+                      </span>
+                    )}
+                    {msg}
+                  </button>
+                )
+            )}
           </div>
           {/* Extra Images */}
           <div className="grid grid-cols-2 gap-4">
