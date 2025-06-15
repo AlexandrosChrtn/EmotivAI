@@ -188,11 +188,11 @@ export const Workbench: React.FC = () => {
   return (
     <main className="w-full flex flex-col items-center pt-4 pb-8 bg-hygge-1 min-h-screen">
       {/* Unified "I need an image for {LabelDropdown}" Header */}
-      <section className={`w-full flex flex-col items-center justify-center mb-10 px-4`}>
+      <section className="w-full flex flex-col items-center justify-center mb-10 px-4">
         <div
           className={`
             w-full max-w-lg rounded-3xl border-2 border-white/50 shadow-xl 
-            bg-gradient-to-tr ${currentGradient} 
+            bg-gradient-to-tr ${labelGradients[selected]} 
             py-7 px-6 sm:px-10 flex flex-wrap items-center justify-center gap-3
             backdrop-blur-md 
             animate-fade-in
@@ -222,7 +222,7 @@ export const Workbench: React.FC = () => {
               aria-label="Select a label"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "0.625em", // 10px if 16px parent, 8pt smaller than ~18px/1.1em original
+                fontSize: "0.625em",
                 fontWeight: 700,
                 borderRadius: "2em",
                 border: "1.5px solid rgba(250,250,250,.26)",
@@ -241,7 +241,7 @@ export const Workbench: React.FC = () => {
                   className="font-semibold font-playfair"
                   style={{
                     fontFamily: "'Playfair Display', serif",
-                    fontSize: "0.625em", // match dropdown trigger
+                    fontSize: "0.625em",
                   }}
                 >
                   {lbl.text}
@@ -253,15 +253,15 @@ export const Workbench: React.FC = () => {
       </section>
 
       {/* Main Content: Side by Side */}
-      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-8 px-4 items-start justify-center">
-        {/* LEFT: Quotes and Create Button */}
-        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-6 pb-6 md:pb-0 md:pr-8">
-          {/* Quotes Section Title */}
-          <div className="flex flex-col gap-1">
-            <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-1 pl-1">
-              Choose quote
-            </div>
-            {/* Quotes */}
+      <div className="w-full max-w-5xl flex flex-col-reverse md:flex-row gap-8 px-4 items-start justify-center">
+        {/* LEFT PANEL: Quotes + Create Button */}
+        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-2 pb-6 md:pb-0 md:pr-8 order-2 md:order-1">
+          {/* Quotes Section Header */}
+          <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-2 pl-1">
+            CHOOSE QUOTE
+          </div>
+          {/* Quotes */}
+          <div className="flex flex-col gap-1 mb-4">
             {fourMessages.map(
               (msg, idx) =>
                 msg && (
@@ -294,12 +294,7 @@ export const Workbench: React.FC = () => {
                   >
                     {imprintedQuote === msg && (
                       <span
-                        className="absolute top-1.5 right-2 bg-white rounded-full border border-green-400 p-0.5 shadow-sm"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+                        className="absolute top-1.5 right-2 bg-white rounded-full border border-green-400 p-0.5 shadow-sm flex items-center justify-center"
                         aria-label="Selected"
                       >
                         <Check size={13} color="#16a34a" strokeWidth={2.5} />
@@ -310,42 +305,42 @@ export const Workbench: React.FC = () => {
                 )
             )}
           </div>
-          {/* Create Image Panel */}
-          <div className="flex flex-col items-center mt-5">
-            <div className="
-              bg-white/90 rounded-2xl shadow-xl border-2 border-gray-100 px-6 py-6 w-full max-w-[340px] mx-auto
-              flex flex-col items-center space-y-3
-              animate-fade-in
-            ">
-              <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-1 text-center">
-                When ready, create & share your image
+          {/* Create Image Section Header */}
+          <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-2 text-center">
+            WHEN READY, CREATE & SHARE YOUR IMAGE
+          </div>
+          {/* Create Image Bubble */}
+          <div className="
+            bg-white/90 rounded-2xl shadow-xl border-2 border-gray-100 px-6 py-6 w-full max-w-[340px] mx-auto
+            flex flex-col items-center space-y-3
+            animate-fade-in
+            backdrop-blur-[10px]
+            bg-gradient-to-tr from-white/60 via-pink-100/70 to-violet-50/90
+          ">
+            <Button
+              variant="default"
+              size="lg"
+              className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs font-bold shadow-lg transition hover:scale-[1.03]"
+              onClick={handleCreateImage}
+              disabled={!mainImage || !imprintedQuote}
+              aria-label={
+                !imprintedQuote
+                  ? "Select a quote to imprint before creating image"
+                  : "Create image with quote"
+              }
+            >
+              Create image
+            </Button>
+            {!imprintedQuote && (
+              <div className="text-xs text-gray-400 mt-1 text-center">
+                Select a quote above to imprint it on your image!
               </div>
-              <Button
-                variant="default"
-                size="lg"
-                className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs"
-                onClick={handleCreateImage}
-                disabled={!mainImage || !imprintedQuote}
-                aria-label={
-                  !imprintedQuote
-                    ? "Select a quote to imprint before creating image"
-                    : "Create image with quote"
-                }
-              >
-                Create image
-              </Button>
-              {!imprintedQuote && (
-                <div className="text-xs text-gray-400 mt-1 text-center">
-                  Select a quote above to imprint it on your image!
-                </div>
-              )}
-            </div>
+            )}
           </div>
         </section>
 
-        {/* RIGHT: Main Image + Extra Images grid below */}
-        <section className="flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start">
-          {/* Section Title */}
+        {/* RIGHT PANEL: Main Image + Extra Images */}
+        <section className="flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start order-1 md:order-2">
           <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase self-start">
             Your image
           </div>
@@ -380,7 +375,6 @@ export const Workbench: React.FC = () => {
                 grid-cols-2
                 gap-4
               "
-              // Match width of main image (responsive)
             >
               {extraImages.map((img, i) => (
                 <div
