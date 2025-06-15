@@ -19,19 +19,20 @@ export const GlassTextOverlay: React.FC<GlassTextOverlayProps> = ({
   theme = "morning"
 }) => (
   <div
-    className={
-      `demo-glass-overlay ${themeGradients[theme]} animate-fade-in`
-    }
+    className={`demo-glass-overlay ${themeGradients[theme]} animate-fade-in`}
     style={{
-      boxShadow: "0 8px 32px 0 rgba(31,38,135,.12)",
+      boxShadow: "0 8px 32px 0 rgba(31,38,135,0.23)",
       backdropFilter: "blur(18px)",
       WebkitBackdropFilter: "blur(18px)",
-      border: "1.5px solid rgba(255,255,255,0.19)",
-      background: "rgba(255,255,255,0.19)",
+      border: "2px solid rgba(255,255,255,0.55)",
+      // Heavily bump up opacity here, old rgba(255,255,255,0.19) -> now 0.75
+      background: "rgba(255,255,255,0.75)",
       borderRadius: "2rem",
+      // Optionally, add a subtle outline for extra contrast
+      outline: "1.5px solid rgba(120,120,120,0.06)",
     }}
   >
-    <span className="block text-white text-lg sm:text-2xl font-playfair text-center drop-shadow font-semibold tracking-tight leading-snug select-none">
+    <span className="block text-neutral-900 text-lg sm:text-2xl font-playfair text-center drop-shadow font-semibold tracking-tight leading-snug select-none">
       {quote}
     </span>
   </div>
