@@ -1,3 +1,106 @@
+export const labelColors = {
+  morning: "bg-yellow-200 text-yellow-800 border-yellow-300",
+  apology: "bg-blue-100 text-blue-700 border-blue-200",
+  love: "bg-rose-200 text-rose-800 border-rose-300",
+  motivation: "bg-teal-200 text-teal-800 border-teal-300",
+  knowledge: "bg-violet-200 text-violet-700 border-violet-300",
+  night: "bg-blue-800 text-white border-blue-900",
+};
+
+export const aiImages = [
+  {
+    id: "morning-1",
+    url: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80",
+    alt: "Yellow lights between trees in the morning",
+    label: "morning",
+    description: "Sun-dappled forest at sunrise, cozy and hopeful"
+  },
+  {
+    id: "apology-1",
+    url: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=900&q=80",
+    alt: "Sunlight passing through tree leaves (soft forgiving mood)",
+    label: "apology",
+    description: "Gentle light through leaves, a forgiving scene"
+  },
+  {
+    id: "love-1",
+    url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
+    alt: "A couple holding hands on a bench",
+    label: "love",
+    description: "Two people together on a cozy bench, warmth"
+  },
+  {
+    id: "motivation-1",
+    url: "https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=900&q=80",
+    alt: "Sheep on grass field with mountains",
+    label: "motivation",
+    description: "A flock moving forward, progress and momentum"
+  },
+  {
+    id: "knowledge-1",
+    url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
+    alt: "Woman reading a book by a window",
+    label: "knowledge",
+    description: "A cozy scene with books, learning and growth"
+  },
+  {
+    id: "night-1",
+    url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=900&q=80",
+    alt: "Blue starry night sky",
+    label: "night",
+    description: "A calm, starlit night, feeling peaceful"
+  },
+];
+
+// Demo labels for dropdown (order is important)
+export const aiLabels = [
+  { value: "morning", text: "Good Morning" },
+  { value: "apology", text: "Apology" },
+  { value: "love", text: "Love" },
+  { value: "motivation", text: "Motivation" },
+  { value: "knowledge", text: "Knowledge" },
+  { value: "night", text: "Good Night" },
+];
+
+// Demo quotes, grouped by label
+export const aiQuotes = {
+  morning: [
+    "Good morning! Each sunrise brings a new beginning.",
+    "Rise and shine – today is full of cozy possibilities.",
+    "Embrace today with a warm heart and an open mind.",
+    "Let gentle light and warm moments guide your morning."
+  ],
+  apology: [
+    "I'm sorry. Sometimes words fall short, but my heart is true.",
+    "A gentle apology can warm even the coldest day.",
+    "Forgiveness brings coziness back to any home.",
+    "Let's find comfort in understanding and start again."
+  ],
+  love: [
+    "Love is the gentle warmth that lights every home.",
+    "Let your heart be soft, your words kind, and your love endless.",
+    "The simplest things done with love are the most precious.",
+    "Spread love like sunshine on a cozy afternoon."
+  ],
+  motivation: [
+    "Little steps can take you to wonderful places.",
+    "Even the coziest moments can spark the greatest dreams.",
+    "You are capable of beautiful things – start today.",
+    "Every small effort brings you closer to your dreams."
+  ],
+  knowledge: [
+    "A curious mind is a cozy mind – never stop learning.",
+    "Knowledge is a warm cup of tea on a chilly day, enriching and comforting.",
+    "Reading fills the soul with the gentle glow of wisdom.",
+    "Every question is a door to a cozier mind."
+  ],
+  night: [
+    "Good night! Rest your dreams on a bed of possibility.",
+    "May your night be filled with peace, warmth and sweet dreams.",
+    "The stars are cozy lights comforting you to sleep.",
+    "Drift into sleep wrapped in gentle thoughts and calm."
+  ]
+};
 
 export const demoImages = [
   {
