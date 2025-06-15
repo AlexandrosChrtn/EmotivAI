@@ -17,7 +17,7 @@ type WorkbenchMode = "manual" | "ai";
 // simple local state demo: select image, select quote, see preview
 
 export const Workbench: React.FC = () => {
-  const [mode, setMode] = React.useState<WorkbenchMode>("ai");
+  const [mode, setMode] = React.useState<"manual" | "ai">("ai");
 
   // AI Mode state
   const [selectedLabel, setSelectedLabel] = React.useState(aiLabels[0].value);
@@ -61,7 +61,7 @@ export const Workbench: React.FC = () => {
       {mode === "ai" && (
         <section>
           <h2 className="font-playfair text-3xl sm:text-4xl font-bold mb-4 text-center text-primary">
-            AI Cozy Image Generator
+            AI Image Generator
           </h2>
           <div className="flex flex-col items-center gap-8">
             {/* Label (Use) selection */}

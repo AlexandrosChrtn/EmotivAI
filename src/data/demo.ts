@@ -1,3 +1,4 @@
+
 export const labelColors = {
   morning: "bg-yellow-200 text-yellow-800 border-yellow-300",
   apology: "bg-blue-100 text-blue-700 border-blue-200",
@@ -13,7 +14,7 @@ export const aiImages = [
     url: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80",
     alt: "Yellow lights between trees in the morning",
     label: "morning",
-    description: "Sun-dappled forest at sunrise, cozy and hopeful"
+    description: "Sun-dappled forest at sunrise"
   },
   {
     id: "apology-1",
@@ -27,7 +28,7 @@ export const aiImages = [
     url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
     alt: "A couple holding hands on a bench",
     label: "love",
-    description: "Two people together on a cozy bench, warmth"
+    description: "Two people together on a bench"
   },
   {
     id: "motivation-1",
@@ -41,7 +42,7 @@ export const aiImages = [
     url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
     alt: "Woman reading a book by a window",
     label: "knowledge",
-    description: "A cozy scene with books, learning and growth"
+    description: "A scene with books, learning and growth"
   },
   {
     id: "night-1",
@@ -52,7 +53,6 @@ export const aiImages = [
   },
 ];
 
-// Demo labels for dropdown (order is important)
 export const aiLabels = [
   { value: "morning", text: "Good Morning" },
   { value: "apology", text: "Apology" },
@@ -62,42 +62,41 @@ export const aiLabels = [
   { value: "night", text: "Good Night" },
 ];
 
-// Demo quotes, grouped by label
 export const aiQuotes = {
   morning: [
     "Good morning! Each sunrise brings a new beginning.",
-    "Rise and shine – today is full of cozy possibilities.",
+    "Rise and shine – today is full of possibilities.",
     "Embrace today with a warm heart and an open mind.",
-    "Let gentle light and warm moments guide your morning."
+    "Let gentle light and bright moments guide your morning."
   ],
   apology: [
     "I'm sorry. Sometimes words fall short, but my heart is true.",
-    "A gentle apology can warm even the coldest day.",
-    "Forgiveness brings coziness back to any home.",
-    "Let's find comfort in understanding and start again."
+    "A gentle apology can restore trust.",
+    "Forgiveness brings comfort back to any home.",
+    "Let's find understanding and start again."
   ],
   love: [
-    "Love is the gentle warmth that lights every home.",
+    "Love is the warmth that lights every home.",
     "Let your heart be soft, your words kind, and your love endless.",
     "The simplest things done with love are the most precious.",
-    "Spread love like sunshine on a cozy afternoon."
+    "Spread love like sunshine on an afternoon."
   ],
   motivation: [
     "Little steps can take you to wonderful places.",
-    "Even the coziest moments can spark the greatest dreams.",
+    "Moments can spark the greatest dreams.",
     "You are capable of beautiful things – start today.",
-    "Every small effort brings you closer to your dreams."
+    "Every effort brings you closer to your dreams."
   ],
   knowledge: [
-    "A curious mind is a cozy mind – never stop learning.",
-    "Knowledge is a warm cup of tea on a chilly day, enriching and comforting.",
-    "Reading fills the soul with the gentle glow of wisdom.",
-    "Every question is a door to a cozier mind."
+    "A curious mind never stops learning.",
+    "Knowledge is like a warm cup of tea, enriching and comforting.",
+    "Reading fills the soul with the glow of wisdom.",
+    "Every question is a door to learning."
   ],
   night: [
     "Good night! Rest your dreams on a bed of possibility.",
     "May your night be filled with peace, warmth and sweet dreams.",
-    "The stars are cozy lights comforting you to sleep.",
+    "The stars are lights comforting you to sleep.",
     "Drift into sleep wrapped in gentle thoughts and calm."
   ]
 };
@@ -137,44 +136,44 @@ export const demoImages = [
 
 export const demoQuotes = [
   // Good Morning
-  { label: "morning", text: "Good morning Each sunrise brings a new beginning" },
-  { label: "morning", text: "Rise and shine today is full of cozy possibilities" },
-  { label: "morning", text: "Embrace today with a warm heart and an open mind" },
-  { label: "morning", text: "Let gentle light and warm moments guide your morning" },
+  { label: "morning", text: "Good morning! Each sunrise brings a new beginning." },
+  { label: "morning", text: "Rise and shine – today is full of possibilities." },
+  { label: "morning", text: "Embrace today with a warm heart and an open mind." },
+  { label: "morning", text: "Let gentle light and bright moments guide your morning." },
 
   // Love
-  { label: "love", text: "Love is the gentle warmth that lights every home" },
-  { label: "love", text: "Let your heart be soft your words kind and your love endless" },
-  { label: "love", text: "The simplest things done with love are the most precious" },
-  { label: "love", text: "Spread love like sunshine on a cozy afternoon" },
+  { label: "love", text: "Love is the warmth that lights every home." },
+  { label: "love", text: "Let your heart be soft, your words kind, and your love endless." },
+  { label: "love", text: "The simplest things done with love are the most precious." },
+  { label: "love", text: "Spread love like sunshine on an afternoon." },
 
   // Knowledge
-  { label: "knowledge", text: "A curious mind is a cozy mind never stop learning" },
-  { label: "knowledge", text: "Knowledge is a warm cup of tea on a chilly day enriching and comforting" },
-  { label: "knowledge", text: "Reading fills the soul with the gentle glow of wisdom" },
-  { label: "knowledge", text: "Every question is a door to a cozier mind" },
+  { label: "knowledge", text: "A curious mind never stops learning." },
+  { label: "knowledge", text: "Knowledge is like a warm cup of tea, enriching and comforting." },
+  { label: "knowledge", text: "Reading fills the soul with the glow of wisdom." },
+  { label: "knowledge", text: "Every question is a door to learning." },
 
   // Motivation
-  { label: "motivation", text: "Little steps can take you to wonderful places" },
-  { label: "motivation", text: "Even the coziest moments can spark the greatest dreams" },
-  { label: "motivation", text: "You are capable of beautiful things start today" },
-  { label: "motivation", text: "Every small effort brings you closer to your dreams" },
+  { label: "motivation", text: "Little steps can take you to wonderful places." },
+  { label: "motivation", text: "Moments can spark the greatest dreams." },
+  { label: "motivation", text: "You are capable of beautiful things – start today." },
+  { label: "motivation", text: "Every effort brings you closer to your dreams." },
 
   // Good night
-  { label: "night", text: "Good night Rest your dreams on a bed of possibility" },
-  { label: "night", text: "May your night be filled with peace warmth and sweet dreams" },
-  { label: "night", text: "The stars are cozy lights comforting you to sleep" },
-  { label: "night", text: "Drift into sleep wrapped in gentle thoughts and calm" },
+  { label: "night", text: "Good night! Rest your dreams on a bed of possibility." },
+  { label: "night", text: "May your night be filled with peace, warmth and sweet dreams." },
+  { label: "night", text: "The stars are lights comforting you to sleep." },
+  { label: "night", text: "Drift into sleep wrapped in gentle thoughts and calm." },
 
   // Anger (playful, generic)
-  { label: "anger", text: "I'm so mad Rawr" },
-  { label: "anger", text: "You're not a nice person" },
-  { label: "anger", text: "Take a deep breath and let the cozy settle in" },
-  { label: "anger", text: "Even on fiery days, find a soft corner" },
+  { label: "anger", text: "I'm so mad. Rawr." },
+  { label: "anger", text: "You're not a nice person." },
+  { label: "anger", text: "Take a deep breath and let it settle in." },
+  { label: "anger", text: "Even on fiery days, find a soft corner." },
 
   // Disappointment (playful, generic)
-  { label: "disappointment", text: "I expected more" },
-  { label: "disappointment", text: "I expected more" },
-  { label: "disappointment", text: "Sometimes things don't go as planned and that's okay" },
-  { label: "disappointment", text: "Not every day is cozy, but tomorrow is a new chance" },
+  { label: "disappointment", text: "I expected more." },
+  { label: "disappointment", text: "Sometimes things don't go as planned and that's okay." },
+  { label: "disappointment", text: "Not every day is a win, but tomorrow is a new chance." },
+  { label: "disappointment", text: "Give yourself a break and keep moving forward." },
 ];
