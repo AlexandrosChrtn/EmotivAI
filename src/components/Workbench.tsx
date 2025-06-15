@@ -10,6 +10,15 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Check } from "lucide-react";
+// NEW: import shadcn/ui Select
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
+  SelectContent,
+  SelectItem,
+} from "./ui/select";
 
 // Gradient backgrounds per label
 const labelGradients: Record<string, string> = {
@@ -204,50 +213,83 @@ export const Workbench: React.FC = () => {
         >
           <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center w-full flex flex-wrap items-center justify-center gap-2">
             I need an image for&nbsp;
-            <select
-              className={`
-                font-playfair
-                px-4 py-2 rounded-full border-2 border-white/50 font-bold 
-                transition focus:ring-2 focus:ring-primary/60 focus:outline-none
-                bg-white/80 shadow-sm
-                hover:bg-white
-                backdrop-blur-[8px]
-                ring-1 ring-white/25
-                text-gray-900 
-                glass
-                min-w-[130px] select-dropdown
-              `}
+            {/* --- UPDATED: Use shadcn/ui Select instead of native <select> --- */}
+            <Select
               value={selected}
-              onChange={(e) => setSelected(e.target.value)}
-              aria-label="Select a label"
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.625em",
-                fontWeight: 700,
-                borderRadius: "2em",
-                border: "1.5px solid rgba(250,250,250,.26)",
-                background: "rgba(255,255,255,0.54)",
-                boxShadow: "0 2px 8px 0 rgba(200,130,205,0.09)",
-                minWidth: 130,
-                outline: "none",
-                letterSpacing: ".02em",
-                WebkitBackdropFilter: "blur(6px)",
-              }}
+              onValueChange={setSelected}
             >
-              {aiLabels.map((lbl) => (
-                <option
-                  key={lbl.value}
-                  value={lbl.value}
-                  className="font-semibold font-playfair"
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: "0.625em",
-                  }}
-                >
-                  {lbl.text}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger
+                className={`
+                  font-playfair
+                  px-6 py-2 rounded-full border-2 border-white/50 font-bold 
+                  transition focus:ring-2 focus:ring-primary/60 focus:outline-none
+                  bg-white/80 shadow-sm
+                  hover:bg-white
+                  backdrop-blur-[8px]
+                  ring-1 ring-white/25
+                  text-gray-900 
+                  glass
+                  min-w-[130px]
+                  select-dropdown
+                  text-base
+                  rounded-full
+                `}
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  borderRadius: "99em",
+                  background: "rgba(255,255,255,0.70)",
+                  boxShadow: "0 2px 8px 0 rgba(200,130,205,0.09)",
+                  minWidth: 130,
+                  outline: "none",
+                  letterSpacing: ".02em",
+                  WebkitBackdropFilter: "blur(6px)",
+                }}
+                aria-label="Select a label"
+              >
+                <SelectValue className="font-bold" />
+              </SelectTrigger>
+              <SelectContent
+                className={`
+                  bg-white/95
+                  border-white/50
+                  shadow-lg
+                  backdrop-blur-[8px]
+                  rounded-2xl
+                  py-2
+                  min-w-[160px]
+                  z-50
+                `}
+                style={{
+                  borderRadius: "2em",
+                  background: "rgba(255,255,255,0.93)",
+                  boxShadow: "0 8px 24px 0 rgba(50,50,70,0.17)",
+                  WebkitBackdropFilter: "blur(8px)",
+                }}
+                position="popper"
+                sideOffset={8}
+              >
+                <SelectGroup>
+                  {aiLabels.map((lbl) => (
+                    <SelectItem
+                      key={lbl.value}
+                      value={lbl.value}
+                      className={`
+                        font-playfair font-semibold text-base px-5 py-2
+                        rounded-full my-1
+                        focus:bg-primary/10
+                        transition
+                      `}
+                      style={{
+                        fontFamily: "'Playfair Display', serif",
+                        borderRadius: "99em",
+                      }}
+                    >
+                      {lbl.text}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </h1>
         </div>
       </section>
