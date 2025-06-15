@@ -34,23 +34,31 @@ export const demoImages = [
 
 export const demoQuotes = [
   // Good Morning
-  { label: "Good morning", text: "Good morning! Each sunrise brings a new beginning.", theme: "morning" },
-  { label: "Good morning", text: "Rise and shine—today is full of cozy possibilities!", theme: "morning" },
-  { label: "Good morning", text: "Embrace today with a warm heart and an open mind.", theme: "morning" },
+  { label: "morning", text: "Good morning Each sunrise brings a new beginning" },
+  { label: "morning", text: "Rise and shine today is full of cozy possibilities" },
+  { label: "morning", text: "Embrace today with a warm heart and an open mind" },
   // Love
-  { label: "Love", text: "Love is the gentle warmth that lights every home.", theme: "love" },
-  { label: "Love", text: "Let your heart be soft, your words kind, and your love endless.", theme: "love" },
-  { label: "Love", text: "The simplest things, done with love, are the most precious.", theme: "love" },
+  { label: "love", text: "Love is the gentle warmth that lights every home" },
+  { label: "love", text: "Let your heart be soft your words kind and your love endless" },
+  { label: "love", text: "The simplest things done with love are the most precious" },
   // Knowledge
-  { label: "Knowledge", text: "A curious mind is a cozy mind—never stop learning.", theme: "knowledge" },
-  { label: "Knowledge", text: "Knowledge is a warm cup of tea on a chilly day—enriching and comforting.", theme: "knowledge" },
-  { label: "Knowledge", text: "Reading fills the soul with the gentle glow of wisdom.", theme: "knowledge" },
+  { label: "knowledge", text: "A curious mind is a cozy mind never stop learning" },
+  { label: "knowledge", text: "Knowledge is a warm cup of tea on a chilly day enriching and comforting" },
+  { label: "knowledge", text: "Reading fills the soul with the gentle glow of wisdom" },
   // Motivation
-  { label: "Motivation", text: "Little steps can take you to wonderful places.", theme: "motivation" },
-  { label: "Motivation", text: "Even the coziest moments can spark the greatest dreams.", theme: "motivation" },
-  { label: "Motivation", text: "You are capable of beautiful things—start today!", theme: "motivation" },
+  { label: "motivation", text: "Little steps can take you to wonderful places" },
+  { label: "motivation", text: "Even the coziest moments can spark the greatest dreams" },
+  { label: "motivation", text: "You are capable of beautiful things start today" },
   // Good night
-  { label: "Good night", text: "Good night! Rest your dreams on a bed of possibility.", theme: "night" },
-  { label: "Good night", text: "May your night be filled with peace, warmth, and sweet dreams.", theme: "night" },
-  { label: "Good night", text: "The stars are cozy lights comforting you to sleep.", theme: "night" },
+  { label: "night", text: "Good night Rest your dreams on a bed of possibility" },
+  { label: "night", text: "May your night be filled with peace warmth and sweet dreams" },
+  { label: "night", text: "The stars are cozy lights comforting you to sleep" },
+  // Anger (playful)
+  { label: "anger", text: "My coffee machine betrayed me again so rude" },
+  { label: "anger", text: "Someone ate my last cookie this is chaos" },
+  { label: "anger", text: "I put on matching socks and they still ruined my vibe" },
+  // Disappointment (playful)
+  { label: "disappointment", text: "My pizza arrived with no extra cheese tragic" },
+  { label: "disappointment", text: "My nap got interrupted by reality how unfair" },
+  { label: "disappointment", text: "That moment when you pour cereal and there is no milk classic letdown" },
 ];
