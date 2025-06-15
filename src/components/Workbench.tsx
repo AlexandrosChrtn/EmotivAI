@@ -251,40 +251,10 @@ export const Workbench: React.FC = () => {
         </div>
       </section>
 
-      {/* Main Content Grid */}
-      <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 px-4">
-        {/* LEFT: Main Image */}
-        <section className="flex flex-col items-center justify-center">
-          {/* Section Title */}
-          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase">
-            Your image
-          </div>
-          {mainImage && (
-            <div
-              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center 
-                w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] 
-                hover:shadow-pink-200/50 transition-all duration-300"
-              style={{
-                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
-              }}
-            >
-              <img
-                src={mainImage}
-                alt="Main generated"
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-              {imprintedQuote && (
-                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-[84%] max-w-[96%]">
-                  <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
-                </div>
-              )}
-            </div>
-          )}
-        </section>
-
-        {/* RIGHT: Quotes and Extra Images */}
-        <section className="flex flex-col gap-6">
+      {/* Main Content: Side by Side */}
+      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-8 px-4 items-start justify-center">
+        {/* LEFT: Quotes and Extra Images */}
+        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-6 md:border-r md:border-gray-200 pb-6 md:pb-0 md:pr-8">
           {/* Quotes Section Title */}
           <div className="flex flex-col gap-1">
             <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-1 pl-1">
@@ -317,7 +287,6 @@ export const Workbench: React.FC = () => {
               )}
             </div>
           </div>
-
           {/* Extra Images */}
           <div className="grid grid-cols-2 gap-4">
             {extraImages.map((img, i) => (
@@ -341,7 +310,6 @@ export const Workbench: React.FC = () => {
               </div>
             ))}
           </div>
-
           {/* "Create Image" Button */}
           <div className="flex flex-col items-center mt-5">
             <Button
@@ -364,6 +332,34 @@ export const Workbench: React.FC = () => {
               </div>
             )}
           </div>
+        </section>
+
+        {/* RIGHT: Main Image */}
+        <section className="flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start">
+          {/* Section Title */}
+          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase self-start">
+            Your image
+          </div>
+          {mainImage && (
+            <div
+              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[425px] lg:h-[425px] hover:shadow-pink-200/50 transition-all duration-300"
+              style={{
+                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
+              }}
+            >
+              <img
+                src={mainImage}
+                alt="Main generated"
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+              {imprintedQuote && (
+                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-[84%] max-w-[96%]">
+                  <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
+                </div>
+              )}
+            </div>
+          )}
         </section>
       </div>
 
