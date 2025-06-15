@@ -1,3 +1,4 @@
+
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -41,8 +42,7 @@ export const Workbench: React.FC = () => {
     setDisplayedImages(newImages);
   };
 
-  // Get the pretty label text for display in the header
-  const prettyLabel = aiLabels.find(l => l.value === selected)?.text || selected;
+  // The color background uses labelGradients based on selected.
   const currentGradient = labelGradients[selected];
 
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
@@ -50,7 +50,7 @@ export const Workbench: React.FC = () => {
 
   return (
     <main className="w-full flex flex-col items-center pt-4 pb-8 bg-hygge-1 min-h-screen">
-      {/* Unified "I need an image for {Label}" Header */}
+      {/* Unified "I need an image for {LabelDropdown}" Header */}
       <section
         className={`w-full flex flex-col items-center justify-center mb-10 px-4`}
       >
@@ -66,35 +66,31 @@ export const Workbench: React.FC = () => {
             boxShadow: "0 16px 32px -8px rgba(0,0,0,0.07), 0 2px 18px 0px rgba(0,0,0,0.13)",
           }}
         >
-          <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center">
-            I need an image for{" "}
-            <span
-              className="inline-block mx-1 px-3 py-1 rounded-lg font-bold bg-white/40 text-gray-900 text-xl sm:text-2xl transition-all shadow md:ml-1"
+          <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center w-full flex flex-wrap items-center justify-center gap-2">
+            I need an image for&nbsp;
+            <select
+              className={`
+                px-3 py-1.5 rounded-lg border-2 border-white/40 text-base font-bold 
+                transition focus:ring-2 focus:ring-primary focus:outline-none bg-white/80 shadow-sm
+                hover:bg-white
+              `}
+              value={selected}
+              onChange={e => setSelected(e.target.value)}
+              aria-label="Select a label"
               style={{
+                minWidth: 130,
+                fontSize: "1.1em",
                 borderRadius: "1.1em",
                 border: "1.5px solid rgba(250,250,250,.26)",
-                background: "rgba(255,255,255,0.35)"
               }}
             >
-              {prettyLabel}
-            </span>
+              {aiLabels.map(lbl => (
+                <option key={lbl.value} value={lbl.value} className="font-semibold">
+                  {lbl.text}
+                </option>
+              ))}
+            </select>
           </h1>
-          <select
-            className={`
-              ml-3 px-3 py-2 rounded-lg border-2 border-white/40 text-base font-bold transition 
-              focus:ring-2 focus:ring-primary focus:outline-none bg-white/80 shadow
-              mt-4 sm:mt-0
-            `}
-            value={selected}
-            onChange={e => setSelected(e.target.value)}
-            aria-label="Select a label"
-          >
-            {aiLabels.map(lbl => (
-              <option key={lbl.value} value={lbl.value} className="font-semibold">
-                {lbl.text}
-              </option>
-            ))}
-          </select>
         </div>
       </section>
 
@@ -169,3 +165,4 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
+
