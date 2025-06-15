@@ -1,3 +1,4 @@
+
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -15,15 +16,43 @@ export const Workbench: React.FC = () => {
   // Use the first label as the default
   const [selected, setSelected] = React.useState(aiLabels[0].value);
 
-  // Filter images for selected label.
-  const labelImages = aiImages.filter((img) =>
-    Array.isArray(img.label) ? img.label.includes(selected) : img.label === selected
+  // Store the current displayed images order for this label
+  const getFirstFiveImages = React.useCallback(
+    (label: string) => {
+      return aiImages
+        .filter((img) =>
+          Array.isArray(img.label)
+            ? img.label.includes(label)
+            : img.label === label
+        )
+        .slice(0, 5);
+    },
+    []
   );
-  
-  // Show up to 5 unique images (no repeats, no placeholders).
-  const firstFiveImages = labelImages.slice(0, 5);
-  const mainImage = firstFiveImages[0]?.url || "";
-  const extraImages = firstFiveImages.slice(1).map(i => i.url);
+
+  const [displayedImages, setDisplayedImages] = React.useState(
+    getFirstFiveImages(selected)
+  );
+
+  // When label changes, reset displayedImages to first 5 for new label
+  React.useEffect(() => {
+    setDisplayedImages(getFirstFiveImages(selected));
+  }, [selected, getFirstFiveImages]);
+
+  const mainImage = displayedImages[0]?.url || "";
+  const extraImages = displayedImages.slice(1);
+
+  // Swap the main image with one of the selected images
+  const handleExtraImageClick = (imgIdx: number) => {
+    // imgIdx is the index in extraImages (0..3)
+    const main = displayedImages[0];
+    const newMain = displayedImages[imgIdx + 1]; // +1 because mainImage is 0
+    const newImages = [...displayedImages];
+    // Swap
+    newImages[0] = newMain;
+    newImages[imgIdx + 1] = main;
+    setDisplayedImages(newImages);
+  };
 
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
   const fourMessages = Array(4)
@@ -99,14 +128,18 @@ export const Workbench: React.FC = () => {
           )}
           {/* Extra images in a grid */}
           <div className="grid grid-cols-4 gap-3">
-            {extraImages.map((url, i) => (
+            {extraImages.map((img, i) => (
               <div
                 key={i}
-                className="rounded-xl overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center"
+                className="rounded-xl overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
                 style={{ minHeight: 0 }}
+                onClick={() => handleExtraImageClick(i)}
+                tabIndex={0}
+                aria-label={`Use this image as main`}
+                title="Click to make main image"
               >
                 <img
-                  src={url}
+                  src={img.url}
                   alt={`Generated for ${selected}`}
                   className="w-full h-full object-cover"
                   draggable={false}
