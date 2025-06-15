@@ -1,5 +1,14 @@
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
+import { GlassTextOverlay } from "./GlassTextOverlay";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { Button } from "./ui/button";
 
 // Gradient backgrounds per label
 const labelGradients: Record<string, string> = {
@@ -8,7 +17,7 @@ const labelGradients: Record<string, string> = {
   love: "from-rose-200/90 via-pink-100/80 to-rose-50/90",
   motivation: "from-teal-200/80 via-green-100/70 to-teal-50/80",
   knowledge: "from-violet-200/80 via-indigo-100/70 to-violet-50/70",
-  night: "from-blue-900/90 via-slate-600/80 to-blue-400/70"
+  night: "from-blue-900/90 via-slate-600/80 to-blue-400/70",
 };
 
 export const Workbench: React.FC = () => {
@@ -18,7 +27,9 @@ export const Workbench: React.FC = () => {
   // Store the current displayed images order for this label
   const getFirstFiveImages = React.useCallback((label: string) => {
     return aiImages
-      .filter(img => Array.isArray(img.label) ? img.label.includes(label) : img.label === label)
+      .filter((img) =>
+        Array.isArray(img.label) ? img.label.includes(label) : img.label === label
+      )
       .slice(0, 5);
   }, []);
   const [displayedImages, setDisplayedImages] = React.useState(getFirstFiveImages(selected));
@@ -26,6 +37,7 @@ export const Workbench: React.FC = () => {
   // When label changes, reset displayedImages to first 5 for new label
   React.useEffect(() => {
     setDisplayedImages(getFirstFiveImages(selected));
+    setImprintedQuote(""); // reset quote when label changes
   }, [selected, getFirstFiveImages]);
 
   const mainImage = displayedImages[0]?.url || "";
@@ -45,14 +57,141 @@ export const Workbench: React.FC = () => {
   const currentGradient = labelGradients[selected];
 
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
-  const fourMessages = Array(4).fill("").map((_, i) => messages[i] || "");
+  const fourMessages = Array(4)
+    .fill("")
+    .map((_, i) => messages[i] || "");
 
+  // ----------- New for Imprinting Quote and Creating Image ------------
+  const [imprintedQuote, setImprintedQuote] = React.useState<string>("");
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [generatedDataUrl, setGeneratedDataUrl] = React.useState<string>("");
+
+  // Allow clicking quote card to imprint + visually highlight selected
+  const handleQuoteClick = (q: string) => {
+    setImprintedQuote(q);
+  };
+
+  // Helper to create image with quote overlay via canvas
+  const handleCreateImage = async () => {
+    // Load image
+    const img = new window.Image();
+    img.crossOrigin = "anonymous";
+    img.src = mainImage;
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+
+    // Canvas size matches displayed
+    const size = 500; // for square preview, or img.naturalWidth
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Draw main image
+    ctx.drawImage(img, 0, 0, size, size);
+
+    // Render quote overlay using similar style to homepage
+    if (imprintedQuote) {
+      // Glassmorphic overlay
+      // White with alpha bg
+      const overlayW = size * 0.84;
+      const overlayH = size * 0.24;
+      const overlayX = size * 0.08;
+      const overlayY = size * 0.70;
+      ctx.save();
+      ctx.globalAlpha = 0.68;
+      // Rounded rectangle
+      ctx.fillStyle = "#fff";
+      roundRect(ctx, overlayX, overlayY, overlayW, overlayH, 24);
+      ctx.fill();
+      ctx.restore();
+
+      // Quote text (centered, multi-line if needed)
+      ctx.save();
+      ctx.font = "700 22px 'Playfair Display', serif";
+      ctx.fillStyle = "#303160";
+      ctx.textBaseline = "top";
+      ctx.textAlign = "center";
+      // Simple multi-line wrapping
+      const lines = wrapTextLines(
+        ctx,
+        imprintedQuote,
+        overlayW - 30,
+        "700 22px 'Playfair Display', serif"
+      );
+      let textY = overlayY + (overlayH - lines.length * 26) / 2;
+      lines.forEach((line) => {
+        ctx.fillText(line, size / 2, textY);
+        textY += 26;
+      });
+      ctx.restore();
+    }
+    setGeneratedDataUrl(canvas.toDataURL("image/png"));
+    setDialogOpen(true);
+  };
+
+  // Helper: draw rounded rectangle (for glass overlay bg)
+  function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  // Helper: wrap text for quote
+  function wrapTextLines(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    maxWidth: number,
+    font: string
+  ) {
+    ctx.font = font;
+    const words = text.split(" ");
+    const lines = [];
+    let line = "";
+    for (const word of words) {
+      const test = line + (line ? " " : "") + word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  // Copy dataUrl to clipboard as image
+  const handleCopy = async () => {
+    if (!generatedDataUrl) return;
+    try {
+      const res = await fetch(generatedDataUrl);
+      const blob = await res.blob();
+      await navigator.clipboard.write([
+        new window.ClipboardItem({ [blob.type]: blob }),
+      ]);
+      alert("Image copied! You can now paste it to your friends 🎉");
+    } catch (err) {
+      alert("Copy failed. Try saving the image manually.");
+    }
+  };
+
+  // Render the main UI
   return (
     <main className="w-full flex flex-col items-center pt-4 pb-8 bg-hygge-1 min-h-screen">
       {/* Unified "I need an image for {LabelDropdown}" Header */}
-      <section
-        className={`w-full flex flex-col items-center justify-center mb-10 px-4`}
-      >
+      <section className={`w-full flex flex-col items-center justify-center mb-10 px-4`}>
         <div
           className={`
             w-full max-w-lg rounded-3xl border-2 border-white/50 shadow-xl 
@@ -62,7 +201,8 @@ export const Workbench: React.FC = () => {
             animate-fade-in
           `}
           style={{
-            boxShadow: "0 16px 32px -8px rgba(0,0,0,0.07), 0 2px 18px 0px rgba(0,0,0,0.13)",
+            boxShadow:
+              "0 16px 32px -8px rgba(0,0,0,0.07), 0 2px 18px 0px rgba(0,0,0,0.13)",
           }}
         >
           <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center w-full flex flex-wrap items-center justify-center gap-2">
@@ -81,7 +221,7 @@ export const Workbench: React.FC = () => {
                 min-w-[130px] select-dropdown
               `}
               value={selected}
-              onChange={e => setSelected(e.target.value)}
+              onChange={(e) => setSelected(e.target.value)}
               aria-label="Select a label"
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -97,7 +237,7 @@ export const Workbench: React.FC = () => {
                 WebkitBackdropFilter: "blur(6px)",
               }}
             >
-              {aiLabels.map(lbl => (
+              {aiLabels.map((lbl) => (
                 <option
                   key={lbl.value}
                   value={lbl.value}
@@ -120,12 +260,12 @@ export const Workbench: React.FC = () => {
         {/* LEFT: Main Image */}
         <section className="flex justify-center">
           {mainImage && (
-            <div 
-              className="rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center 
+            <div
+              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center 
                 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] 
                 hover:shadow-pink-200/50 transition-all duration-300"
               style={{
-                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)"
+                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
               }}
             >
               <img
@@ -134,6 +274,11 @@ export const Workbench: React.FC = () => {
                 className="w-full h-full object-cover"
                 draggable={false}
               />
+              {imprintedQuote && (
+                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-[84%] max-w-[96%]">
+                  <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
+                </div>
+              )}
             </div>
           )}
         </section>
@@ -145,19 +290,28 @@ export const Workbench: React.FC = () => {
             {fourMessages.map(
               (msg, idx) =>
                 msg && (
-                  <div
-                    className="bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg"
+                  <button
+                    type="button"
                     key={idx}
+                    className={`
+                      bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg transition
+                      ${imprintedQuote === msg
+                        ? "ring-2 ring-primary ring-offset-2 scale-[1.04] bg-primary/15 shadow-pink-100/60"
+                        : "hover:bg-white/100 hover:shadow-2xl"}
+                    `}
                     style={{
-                      boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)"
+                      boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
+                      cursor: "pointer",
                     }}
+                    onClick={() => handleQuoteClick(msg)}
+                    aria-pressed={imprintedQuote === msg}
                   >
                     {msg}
-                  </div>
+                  </button>
                 )
             )}
           </div>
-          
+
           {/* Extra Images */}
           <div className="grid grid-cols-2 gap-4">
             {extraImages.map((img, i) => (
@@ -165,7 +319,7 @@ export const Workbench: React.FC = () => {
                 key={i}
                 className="rounded-xl overflow-hidden border-2 border-white/60 shadow-lg bg-white/60 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200"
                 style={{
-                  boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)"
+                  boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
                 }}
                 onClick={() => handleExtraImageClick(i)}
                 tabIndex={0}
@@ -181,8 +335,75 @@ export const Workbench: React.FC = () => {
               </div>
             ))}
           </div>
+
+          {/* "Create Image" Button */}
+          <div className="flex flex-col items-center mt-5">
+            <Button
+              variant="default"
+              size="lg"
+              className="rounded-full px-8 py-3 font-playfair text-lg"
+              onClick={handleCreateImage}
+              disabled={!mainImage || !imprintedQuote}
+              aria-label={
+                !imprintedQuote
+                  ? "Select a quote to imprint before creating image"
+                  : "Create image with quote"
+              }
+            >
+              Create image
+            </Button>
+            {!imprintedQuote && (
+              <div className="text-xs text-gray-400 mt-2">
+                Select a quote above to imprint it on your image!
+              </div>
+            )}
+          </div>
         </section>
       </div>
+
+      {/* Dialog for generated image and copy/share */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="max-w-md w-full">
+          <DialogHeader>
+            <DialogTitle>Your shareable image is ready!</DialogTitle>
+          </DialogHeader>
+          <div className="w-full flex flex-col items-center gap-4 py-3">
+            {generatedDataUrl && (
+              <img
+                src={generatedDataUrl}
+                alt="Your generated quote image"
+                className="rounded-xl shadow-lg max-w-full max-h-[360px] border"
+                style={{ background: "#fff" }}
+              />
+            )}
+            <div className="flex flex-col gap-3 w-full mt-2">
+              <Button
+                onClick={handleCopy}
+                className="font-semibold w-full rounded-full"
+              >
+                Copy image
+              </Button>
+              <a
+                href={generatedDataUrl}
+                download="image-with-quote.png"
+                className="w-full"
+              >
+                <Button
+                  className="w-full rounded-full"
+                  variant="outline"
+                  type="button"
+                >
+                  Download image
+                </Button>
+              </a>
+              <span className="text-xs text-muted-foreground pt-2 text-center">
+                Paste or send this image anywhere you want! <br />
+                If copy fails, tap "Download" to save it manually.
+              </span>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 };
