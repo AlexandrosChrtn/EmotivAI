@@ -70,7 +70,7 @@ export const Workbench: React.FC = () => {
               className="object-cover w-full h-80 brightness-97"
               draggable={false}
             />
-            <GlassTextOverlay quote={quote.text} theme={quote.theme as any} />
+            <GlassTextOverlay quote={quote.text} theme={quote.label as any} />
           </div>
         </div>
       </div>
@@ -80,3 +80,4 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
+

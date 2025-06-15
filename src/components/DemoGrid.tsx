@@ -17,10 +17,11 @@ export const DemoGrid: React.FC = () => {
               className="gallery-img object-cover h-80 w-full brightness-97 transition-all duration-300 group-hover:scale-105"
               draggable={false}
             />
-            <GlassTextOverlay quote={quote.text} theme={quote.theme as any} />
+            <GlassTextOverlay quote={quote.text} theme={quote.label as any} />
           </div>
         );
       })}
     </section>
   );
 };
+
