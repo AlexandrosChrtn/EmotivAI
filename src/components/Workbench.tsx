@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
+import { Check } from "lucide-react";
 
 // Gradient backgrounds per label
 const labelGradients: Record<string, string> = {
@@ -269,11 +270,12 @@ export const Workbench: React.FC = () => {
                       type="button"
                       key={idx}
                       className={`
-                        bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg transition
+                        relative
+                        bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border shadow-lg transition
                         min-h-[68px] min-w-full h-[68px] flex items-center justify-center text-center
                         ${imprintedQuote === msg
-                          ? "ring-2 ring-primary ring-offset-2 scale-[1.04] bg-primary/15 shadow-pink-100/60"
-                          : "hover:bg-white/100 hover:shadow-2xl"}
+                          ? "border-green-500 ring-2 ring-green-400 ring-offset-2 scale-[1.04] bg-primary/10 shadow-green-100/60"
+                          : "border-white/60 hover:bg-white/100 hover:shadow-2xl"}
                       `}
                       style={{
                         boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
@@ -285,12 +287,25 @@ export const Workbench: React.FC = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         textAlign: "center",
-                        // Ensure word wrap for long quotes
                         whiteSpace: "normal",
+                        position: "relative",
                       }}
                       onClick={() => setImprintedQuote(msg)}
                       aria-pressed={imprintedQuote === msg}
                     >
+                      {imprintedQuote === msg && (
+                        <span
+                          className="absolute top-2 right-3 bg-white rounded-full border border-green-400 p-0.5 shadow-md"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                          aria-label="Selected"
+                        >
+                          <Check size={16} color="#16a34a" strokeWidth={2.5} />
+                        </span>
+                      )}
                       {msg}
                     </button>
                   )
