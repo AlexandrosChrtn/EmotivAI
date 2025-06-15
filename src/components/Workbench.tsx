@@ -11,21 +11,8 @@ const labelGradients: Record<string, string> = {
   night: "from-blue-800/90 via-slate-600/80 to-blue-500/70",
 };
 
-function gradientBadge(label: string, children: React.ReactNode) {
-  return (
-    <span
-      className={`rounded-xl px-4 py-2 font-bold text-base text-gray-900 whitespace-nowrap shadow-sm bg-gradient-to-tr ${labelGradients[label] || "from-gray-200 to-gray-100"}`}
-      style={{ letterSpacing: "0.03em", minWidth: 120, display: "inline-block", textAlign: "center"}}
-    >
-      {children}
-    </span>
-  );
-}
-
 export const Workbench: React.FC = () => {
   const [selected, setSelected] = React.useState(aiLabels[0].value);
-
-  // Ensure 4 messages - fallback to empty strings if not enough
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
   const fourMessages = Array(4)
     .fill("")
@@ -33,17 +20,16 @@ export const Workbench: React.FC = () => {
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-center bg-hygge-1 px-2 py-12">
-      <div className="bg-white/70 rounded-3xl shadow-lg px-6 py-8 flex flex-col items-center gap-8 max-w-xl w-full border border-white/40">
-        {/* Prompt */}
-        <div className="w-full flex flex-col items-center gap-4">
-          <div className="bg-white rounded-xl p-4 shadow border font-semibold text-lg mb-1 text-gray-900 w-full text-center">
-            Get me an image for...
-          </div>
-          {/* Label dropdown */}
-          <div className="w-full flex justify-center">
+      {/* Centered Glassy Box */}
+      <div className="bg-white/70 rounded-3xl shadow-lg px-7 py-10 flex flex-col items-center gap-8 max-w-xl w-full border border-white/40">
+        {/* Main Prompt with integrated dropdown */}
+        <div className="w-full flex items-center justify-center">
+          <div className="flex w-full rounded-xl shadow border font-semibold text-lg text-gray-900 bg-gradient-to-tr from-white via-white/90 to-white px-2 py-3 items-center">
+            <span className="ml-2 text-base md:text-lg mr-3 select-none">Get me an image for</span>
             <select
-              className={`rounded-xl px-4 py-2 border shadow bg-gradient-to-tr ${labelGradients[selected]} font-bold text-base outline-none select-none`}
-              style={{ minWidth: 180 }}
+              className={`rounded-xl px-4 py-2 border-none font-bold text-base outline-none ml-2
+                text-gray-900 shadow-sm cursor-pointer bg-gradient-to-tr
+                ${labelGradients[selected]} transition-colors min-w-[150px]`}
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
               aria-label="Select a label"
@@ -52,9 +38,11 @@ export const Workbench: React.FC = () => {
                 <option
                   key={lbl.value}
                   value={lbl.value}
-                  className={`font-semibold`}
+                  className="font-semibold"
                   style={{
                     color: "#291b1b",
+                    background:
+                      "linear-gradient(to top right, #fffbe8 0%, #ffe0ee 50%, #e8f8ff 100%)",
                   }}
                 >
                   {lbl.text}
@@ -63,34 +51,30 @@ export const Workbench: React.FC = () => {
             </select>
           </div>
         </div>
-        {/* Show label and messages */}
-        <div className="flex flex-col items-center w-full gap-4">
-          <div className="mb-1">{gradientBadge(selected, aiLabels.find((l) => l.value === selected)?.text || selected)}</div>
-          {/* Placeholder image */}
-          <div className="rounded-2xl overflow-hidden shadow-md border border-white/60 mb-2">
-            <img
-              src="https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=520&q=80"
-              alt="Placeholder"
-              className="w-[320px] h-[230px] object-cover"
-              draggable={false}
-            />
-          </div>
-          <div className="flex flex-col gap-3 w-full">
-            {fourMessages.map(
-              (msg, idx) =>
-                msg && (
-                  <div
-                    className="bg-white/80 rounded-lg px-4 py-2 text-base text-gray-800 font-playfair border border-gray-200 shadow-sm"
-                    key={idx}
-                  >
-                    {msg}
-                  </div>
-                )
-            )}
-          </div>
+        {/* Placeholder image */}
+        <div className="rounded-2xl overflow-hidden shadow-md border border-white/60 mb-2">
+          <img
+            src="https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=520&q=80"
+            alt="Placeholder"
+            className="w-[320px] h-[230px] object-cover"
+            draggable={false}
+          />
+        </div>
+        {/* Four Messages for selected label */}
+        <div className="flex flex-col gap-3 w-full">
+          {fourMessages.map(
+            (msg, idx) =>
+              msg && (
+                <div
+                  className="bg-white/80 rounded-lg px-4 py-2 text-base text-gray-800 font-playfair border border-gray-200 shadow-sm"
+                  key={idx}
+                >
+                  {msg}
+                </div>
+              )
+          )}
         </div>
       </div>
     </main>
   );
 };
-
