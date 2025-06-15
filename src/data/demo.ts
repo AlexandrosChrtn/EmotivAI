@@ -1,3 +1,4 @@
+
 export const demoImages = [
   {
     id: "cozy-1",
@@ -36,26 +37,41 @@ export const demoQuotes = [
   { label: "morning", text: "Good morning Each sunrise brings a new beginning" },
   { label: "morning", text: "Rise and shine today is full of cozy possibilities" },
   { label: "morning", text: "Embrace today with a warm heart and an open mind" },
+  { label: "morning", text: "Let gentle light and warm moments guide your morning" },
+
   // Love
   { label: "love", text: "Love is the gentle warmth that lights every home" },
   { label: "love", text: "Let your heart be soft your words kind and your love endless" },
   { label: "love", text: "The simplest things done with love are the most precious" },
+  { label: "love", text: "Spread love like sunshine on a cozy afternoon" },
+
   // Knowledge
   { label: "knowledge", text: "A curious mind is a cozy mind never stop learning" },
   { label: "knowledge", text: "Knowledge is a warm cup of tea on a chilly day enriching and comforting" },
   { label: "knowledge", text: "Reading fills the soul with the gentle glow of wisdom" },
+  { label: "knowledge", text: "Every question is a door to a cozier mind" },
+
   // Motivation
   { label: "motivation", text: "Little steps can take you to wonderful places" },
   { label: "motivation", text: "Even the coziest moments can spark the greatest dreams" },
   { label: "motivation", text: "You are capable of beautiful things start today" },
+  { label: "motivation", text: "Every small effort brings you closer to your dreams" },
+
   // Good night
   { label: "night", text: "Good night Rest your dreams on a bed of possibility" },
   { label: "night", text: "May your night be filled with peace warmth and sweet dreams" },
   { label: "night", text: "The stars are cozy lights comforting you to sleep" },
+  { label: "night", text: "Drift into sleep wrapped in gentle thoughts and calm" },
+
   // Anger (playful, generic)
   { label: "anger", text: "I'm so mad Rawr" },
   { label: "anger", text: "You're not a nice person" },
+  { label: "anger", text: "Take a deep breath and let the cozy settle in" },
+  { label: "anger", text: "Even on fiery days, find a soft corner" },
+
   // Disappointment (playful, generic)
   { label: "disappointment", text: "I expected more" },
   { label: "disappointment", text: "I expected more" },
+  { label: "disappointment", text: "Sometimes things don't go as planned and that's okay" },
+  { label: "disappointment", text: "Not every day is cozy, but tomorrow is a new chance" },
 ];
