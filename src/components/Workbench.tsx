@@ -313,7 +313,15 @@ export const Workbench: React.FC = () => {
           <Button
             variant="default"
             size="lg"
-            className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs font-bold shadow-lg transition hover:scale-[1.03] mx-auto"
+            className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs font-bold shadow-lg transition hover:scale-[1.03] mx-auto 
+              bg-gradient-to-r from-[#eecda3] via-[#ef629f] to-[#ef629f] text-white border-0
+              hover:from-[#ef629f] hover:to-[#eecda3]
+              "
+            style={{
+              background: "linear-gradient(90deg, #eecda3 0%, #ef629f 100%)",
+              color: "#fff",
+              border: 0,
+            }}
             onClick={handleCreateImage}
             disabled={!mainImage || !imprintedQuote}
             aria-label={
@@ -409,7 +417,10 @@ export const Workbench: React.FC = () => {
 
       {/* Dialog for generated image and copy/share */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-md w-full">
+        <DialogContent
+          className="max-w-md w-full bg-white border border-gray-200 shadow-xl rounded-2xl"
+        >
+          {/* give DialogContent a proper white solid background, border, and shadow */}
           <DialogHeader>
             <DialogTitle>Your shareable image is ready!</DialogTitle>
           </DialogHeader>
