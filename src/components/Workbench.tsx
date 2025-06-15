@@ -44,9 +44,11 @@ export const Workbench: React.FC = () => {
 
   // Swap the main image with one of the selected images
   const handleExtraImageClick = (imgIdx: number) => {
+    // imgIdx is the index in extraImages (0..3)
     const main = displayedImages[0];
-    const newMain = displayedImages[imgIdx + 1];
+    const newMain = displayedImages[imgIdx + 1]; // +1 because mainImage is 0
     const newImages = [...displayedImages];
+    // Swap
     newImages[0] = newMain;
     newImages[imgIdx + 1] = main;
     setDisplayedImages(newImages);
@@ -58,21 +60,21 @@ export const Workbench: React.FC = () => {
     .map((_, i) => messages[i] || "");
 
   return (
-    <main className="flex items-start justify-center bg-hygge-1 px-1 pt-6 pb-3 min-h-[0]">
+    <main className="min-h-screen flex items-center justify-center bg-hygge-1 px-2 py-12">
       <div
-        className="w-full max-w-4xl md:grid md:grid-cols-2 gap-6 items-start"
+        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10 items-start"
         style={{ alignItems: "stretch" }}
       >
         {/* LEFT: Prompt bar + 4 messages */}
-        <section className="flex flex-col gap-3">
+        <section className="flex flex-col gap-7">
           {/* Prompt bar */}
-          <div className="flex rounded-xl shadow border font-semibold text-base text-gray-900 bg-gradient-to-tr from-white via-white/90 to-white px-2 py-2 items-center w-full">
-            <span className="text-sm md:text-base mr-2 select-none font-medium">
+          <div className="flex rounded-2xl shadow border font-semibold text-lg text-gray-900 bg-gradient-to-tr from-white via-white/90 to-white px-3 py-4 items-center w-full">
+            <span className="text-base md:text-lg mr-3 select-none font-medium">
               I need an image for
             </span>
             <select
-              className={`rounded-lg px-3 py-1 border-none font-bold text-base outline-none ml-1
-                text-gray-900 shadow-sm cursor-pointer bg-gradient-to-tr transition-colors min-w-[120px]
+              className={`rounded-xl px-4 py-2 border-none font-bold text-base outline-none ml-2
+                text-gray-900 shadow-sm cursor-pointer bg-gradient-to-tr transition-colors min-w-[150px]
                 ${labelGradients[selected]} duration-200`}
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
@@ -95,12 +97,12 @@ export const Workbench: React.FC = () => {
             </select>
           </div>
           {/* 4 messages */}
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex flex-col gap-3 w-full">
             {fourMessages.map(
               (msg, idx) =>
                 msg && (
                   <div
-                    className="bg-white/85 rounded px-3 py-1 text-sm text-gray-800 font-playfair border border-gray-200 shadow"
+                    className="bg-white/85 rounded-lg px-4 py-2 text-base text-gray-800 font-playfair border border-gray-200 shadow"
                     key={idx}
                   >
                     {msg}
@@ -111,25 +113,25 @@ export const Workbench: React.FC = () => {
         </section>
 
         {/* RIGHT: Images grid */}
-        <section className="flex flex-col gap-3 mt-3 md:mt-0">
+        <section className="flex flex-col gap-4">
           {/* Main image */}
           {mainImage && (
-            <div className="rounded-xl overflow-hidden border border-white/60 shadow-xl mb-0 h-[180px] w-full flex justify-center items-center bg-white/60">
+            <div className="rounded-2xl overflow-hidden border border-white/60 shadow-xl mb-0 h-[240px] w-full flex justify-center items-center bg-white/60">
               <img
                 src={mainImage}
                 alt="Main generated"
                 className="w-full h-full object-cover object-center"
-                style={{ maxHeight: 180, borderRadius: "0.9rem" }}
+                style={{ maxHeight: 240, borderRadius: "1.25rem" }}
                 draggable={false}
               />
             </div>
           )}
           {/* Extra images in a grid */}
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-4 gap-3">
             {extraImages.map((img, i) => (
               <div
                 key={i}
-                className="rounded-lg overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
+                className="rounded-xl overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
                 style={{ minHeight: 0 }}
                 onClick={() => handleExtraImageClick(i)}
                 tabIndex={0}
@@ -151,4 +153,3 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
-
