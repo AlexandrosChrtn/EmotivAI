@@ -70,7 +70,7 @@ export const Workbench: React.FC = () => {
             <select
               className={`
                 font-playfair
-                px-4 py-2 rounded-full border-2 border-white/50 text-lg font-bold 
+                px-4 py-2 rounded-full border-2 border-white/50 font-bold 
                 transition focus:ring-2 focus:ring-primary/60 focus:outline-none
                 bg-white/80 shadow-sm
                 hover:bg-white
@@ -85,7 +85,7 @@ export const Workbench: React.FC = () => {
               aria-label="Select a label"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "1.1em",
+                fontSize: "0.625em", // 10px if 16px parent, 8pt smaller than ~18px/1.1em original
                 fontWeight: 700,
                 borderRadius: "2em",
                 border: "1.5px solid rgba(250,250,250,.26)",
@@ -98,7 +98,15 @@ export const Workbench: React.FC = () => {
               }}
             >
               {aiLabels.map(lbl => (
-                <option key={lbl.value} value={lbl.value} className="font-semibold font-playfair">
+                <option
+                  key={lbl.value}
+                  value={lbl.value}
+                  className="font-semibold font-playfair"
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "0.625em", // match dropdown trigger
+                  }}
+                >
                   {lbl.text}
                 </option>
               ))}
