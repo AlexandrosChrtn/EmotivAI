@@ -213,7 +213,7 @@ export const Workbench: React.FC = () => {
         >
           <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center w-full flex flex-wrap items-center justify-center gap-2">
             I need an image for&nbsp;
-            {/* --- UPDATED: Use shadcn/ui Select instead of native <select> --- */}
+            {/* --- UPDATED: Make SelectTrigger button much wider than menu --- */}
             <Select
               value={selected}
               onValueChange={setSelected}
@@ -238,9 +238,9 @@ export const Workbench: React.FC = () => {
                   borderRadius: "99em",
                   background: "rgba(255,255,255,0.70)",
                   boxShadow: "0 2px 8px 0 rgba(200,130,205,0.09)",
-                  minWidth: 80,
-                  maxWidth: 120,
-                  width: 100,
+                  minWidth: 160,
+                  width: 160,
+                  maxWidth: 220,
                   outline: "none",
                   letterSpacing: ".02em",
                   WebkitBackdropFilter: "blur(6px)",
@@ -286,7 +286,7 @@ export const Workbench: React.FC = () => {
                       style={{
                         fontFamily: "'Playfair Display', serif",
                         borderRadius: "99em",
-                        paddingLeft: '2.3rem', // ensures check icon is separated
+                        paddingLeft: '2.3rem', // ensures check icon is separated from text
                       }}
                     >
                       {lbl.text}
