@@ -7,7 +7,7 @@ import { DemoGrid } from "../components/DemoGrid";
 const Index = () => {
   return <GradientBackground variant={0}>
       <NavBar />
-      <div className="px-2 sm:px-4 pt-12 sm:pt-20 pb-2 max-w-4xl mx-auto flex flex-col items-center">
+      <div className="px-2 pt-12 sm:pt-20 pb-2 max-w-4xl mx-auto flex flex-col items-center py-[24px] sm:px-[12px]">
         <h2 className="font-playfair text-4xl font-bold text-center mb-5 bg-gradient-to-r from-yellow-400 via-pink-300 to-blue-200 text-transparent bg-clip-text sm:text-5xl py-[8px]">
           Cozy Quotes on Beautiful Images
         </h2>
