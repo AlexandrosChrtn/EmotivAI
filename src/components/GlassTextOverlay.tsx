@@ -5,7 +5,6 @@ import React from "react";
 interface GlassTextOverlayProps {
   quote: string;
   theme?: "morning" | "love" | "motivation" | "knowledge" | "night";
-  fontClass?: string; // NEW for font selection
 }
 const themeGradients: Record<GlassTextOverlayProps["theme"], string> = {
   morning: "bg-gradient-to-r from-yellow-300/10 via-rose-200/5 to-white/2.5",
@@ -17,8 +16,7 @@ const themeGradients: Record<GlassTextOverlayProps["theme"], string> = {
 
 export const GlassTextOverlay: React.FC<GlassTextOverlayProps> = ({
   quote,
-  theme = "morning",
-  fontClass = "font-playfair",
+  theme = "morning"
 }) => (
   <div
     className={`demo-glass-overlay ${themeGradients[theme]} animate-fade-in`}
@@ -32,8 +30,9 @@ export const GlassTextOverlay: React.FC<GlassTextOverlayProps> = ({
       outline: "1.5px solid rgba(120,120,120,0.02)", // lowered from 0.03
     }}
   >
-    <span className={`${fontClass} block text-white text-lg sm:text-2xl text-center font-semibold tracking-tight leading-snug select-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]`}>
+    <span className="block text-white text-lg sm:text-2xl font-playfair text-center font-semibold tracking-tight leading-snug select-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
       {quote}
     </span>
   </div>
 );
+
