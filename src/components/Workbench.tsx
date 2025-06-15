@@ -1,4 +1,3 @@
-
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -70,18 +69,30 @@ export const Workbench: React.FC = () => {
             I need an image for&nbsp;
             <select
               className={`
-                px-3 py-1.5 rounded-lg border-2 border-white/40 text-base font-bold 
-                transition focus:ring-2 focus:ring-primary focus:outline-none bg-white/80 shadow-sm
+                px-4 py-2 rounded-full border-2 border-white/50 text-lg font-bold 
+                transition focus:ring-2 focus:ring-primary/60 focus:outline-none
+                bg-white/80 shadow-sm
                 hover:bg-white
+                backdrop-blur-[8px]
+                ring-1 ring-white/25
+                text-gray-900 
+                glass
+                min-w-[130px] select-dropdown
               `}
               value={selected}
               onChange={e => setSelected(e.target.value)}
               aria-label="Select a label"
               style={{
-                minWidth: 130,
                 fontSize: "1.1em",
-                borderRadius: "1.1em",
+                fontWeight: 700,
+                borderRadius: "2em",
                 border: "1.5px solid rgba(250,250,250,.26)",
+                background: "rgba(255,255,255,0.54)",
+                boxShadow: "0 2px 8px 0 rgba(200,130,205,0.09)",
+                minWidth: 130,
+                outline: "none",
+                letterSpacing: ".02em",
+                WebkitBackdropFilter: "blur(6px)",
               }}
             >
               {aiLabels.map(lbl => (
@@ -165,4 +176,3 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
-
