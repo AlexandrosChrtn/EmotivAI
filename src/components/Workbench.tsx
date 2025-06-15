@@ -372,11 +372,34 @@ export const Workbench: React.FC = () => {
           )}
           {/* Extra Images grid below */}
           {extraImages.length > 0 && (
-            <div className="w-full mt-6 grid grid-cols-2 gap-4 max-w-[340px]">
+            <div
+              className="
+                w-[300px] sm:w-[400px] lg:w-[425px]
+                mt-6 
+                grid
+                grid-cols-2
+                gap-4
+              "
+              // Match width of main image (responsive)
+            >
               {extraImages.map((img, i) => (
                 <div
                   key={i}
-                  className="rounded-xl overflow-hidden border-2 border-white/60 shadow-lg bg-white/60 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]"
+                  className="
+                    rounded-xl
+                    overflow-hidden
+                    border-2 border-white/60
+                    shadow-lg
+                    bg-white/60
+                    aspect-square
+                    flex items-center justify-center
+                    cursor-pointer
+                    hover:scale-105
+                    transition-transform duration-200
+                    w-[142px] h-[142px]
+                    sm:w-[192px] sm:h-[192px]
+                    lg:w-[200px] lg:h-[200px]
+                  "
                   style={{
                     boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
                   }}
