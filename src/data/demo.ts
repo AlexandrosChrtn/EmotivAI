@@ -1,4 +1,3 @@
-
 export const demoImages = [
   {
     id: "cozy-1",
@@ -53,12 +52,10 @@ export const demoQuotes = [
   { label: "night", text: "Good night Rest your dreams on a bed of possibility" },
   { label: "night", text: "May your night be filled with peace warmth and sweet dreams" },
   { label: "night", text: "The stars are cozy lights comforting you to sleep" },
-  // Anger (playful)
-  { label: "anger", text: "My coffee machine betrayed me again so rude" },
-  { label: "anger", text: "Someone ate my last cookie this is chaos" },
-  { label: "anger", text: "I put on matching socks and they still ruined my vibe" },
-  // Disappointment (playful)
-  { label: "disappointment", text: "My pizza arrived with no extra cheese tragic" },
-  { label: "disappointment", text: "My nap got interrupted by reality how unfair" },
-  { label: "disappointment", text: "That moment when you pour cereal and there is no milk classic letdown" },
+  // Anger (playful, generic)
+  { label: "anger", text: "I'm so mad Rawr" },
+  { label: "anger", text: "You're not a nice person" },
+  // Disappointment (playful, generic)
+  { label: "disappointment", text: "I expected more" },
+  { label: "disappointment", text: "I expected more" },
 ];
