@@ -254,8 +254,8 @@ export const Workbench: React.FC = () => {
 
       {/* Main Content: Side by Side */}
       <div className="w-full max-w-5xl flex flex-col md:flex-row gap-8 px-4 items-start justify-center">
-        {/* LEFT: Quotes and Extra Images */}
-        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-6 md:border-r md:border-gray-200 pb-6 md:pb-0 md:pr-8">
+        {/* LEFT: Quotes and Create Button */}
+        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-6 pb-6 md:pb-0 md:pr-8">
           {/* Quotes Section Title */}
           <div className="flex flex-col gap-1">
             <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-1 pl-1">
@@ -310,59 +310,46 @@ export const Workbench: React.FC = () => {
                 )
             )}
           </div>
-          {/* Extra Images */}
-          <div className="grid grid-cols-2 gap-4">
-            {extraImages.map((img, i) => (
-              <div
-                key={i}
-                className="rounded-xl overflow-hidden border-2 border-white/60 shadow-lg bg-white/60 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                style={{
-                  boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
-                }}
-                onClick={() => handleExtraImageClick(i)}
-                tabIndex={0}
-                aria-label="Use this image as main"
-                title="Click to make main image"
-              >
-                <img
-                  src={img.url}
-                  alt={`Generated for ${selected}`}
-                  className="w-full h-full object-cover"
-                  draggable={false}
-                />
-              </div>
-            ))}
-          </div>
-          {/* "Create Image" Button */}
+          {/* Create Image Panel */}
           <div className="flex flex-col items-center mt-5">
-            <Button
-              variant="default"
-              size="lg"
-              className="rounded-full px-8 py-3 font-playfair text-lg"
-              onClick={handleCreateImage}
-              disabled={!mainImage || !imprintedQuote}
-              aria-label={
-                !imprintedQuote
-                  ? "Select a quote to imprint before creating image"
-                  : "Create image with quote"
-              }
-            >
-              Create image
-            </Button>
-            {!imprintedQuote && (
-              <div className="text-xs text-gray-400 mt-2">
-                Select a quote above to imprint it on your image!
+            <div className="
+              bg-white/90 rounded-2xl shadow-xl border-2 border-gray-100 px-6 py-6 w-full max-w-[340px] mx-auto
+              flex flex-col items-center space-y-3
+              animate-fade-in
+            ">
+              <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-1 text-center">
+                When ready, create & share your image
               </div>
-            )}
+              <Button
+                variant="default"
+                size="lg"
+                className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs"
+                onClick={handleCreateImage}
+                disabled={!mainImage || !imprintedQuote}
+                aria-label={
+                  !imprintedQuote
+                    ? "Select a quote to imprint before creating image"
+                    : "Create image with quote"
+                }
+              >
+                Create image
+              </Button>
+              {!imprintedQuote && (
+                <div className="text-xs text-gray-400 mt-1 text-center">
+                  Select a quote above to imprint it on your image!
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
-        {/* RIGHT: Main Image */}
+        {/* RIGHT: Main Image + Extra Images grid below */}
         <section className="flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start">
           {/* Section Title */}
           <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase self-start">
             Your image
           </div>
+          {/* Main Image */}
           {mainImage && (
             <div
               className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[425px] lg:h-[425px] hover:shadow-pink-200/50 transition-all duration-300"
@@ -381,6 +368,31 @@ export const Workbench: React.FC = () => {
                   <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
                 </div>
               )}
+            </div>
+          )}
+          {/* Extra Images grid below */}
+          {extraImages.length > 0 && (
+            <div className="w-full mt-6 grid grid-cols-2 gap-4 max-w-[340px]">
+              {extraImages.map((img, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl overflow-hidden border-2 border-white/60 shadow-lg bg-white/60 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]"
+                  style={{
+                    boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
+                  }}
+                  onClick={() => handleExtraImageClick(i)}
+                  tabIndex={0}
+                  aria-label="Use this image as main"
+                  title="Click to make main image"
+                >
+                  <img
+                    src={img.url}
+                    alt={`Generated for ${selected}`}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                </div>
+              ))}
             </div>
           )}
         </section>
@@ -432,3 +444,5 @@ export const Workbench: React.FC = () => {
     </main>
   );
 };
+
+// The file is getting long. Please consider asking me to refactor it into smaller files!
