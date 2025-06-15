@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
         className="focus:outline-none group"
         aria-label="Go to homepage"
       >
-        <h1 className="text-2xl font-playfair font-bold tracking-tight bg-gradient-to-r from-[#eecda3] to-[#ef629f] text-transparent bg-clip-text transition-opacity group-active:opacity-70 group-hover:underline">
+        <h1 className="text-2xl font-playfair font-bold tracking-tight bg-gradient-to-r from-[#eecda3] to-[#ef629f] text-transparent bg-clip-text transition-opacity group-active:opacity-70">
           Hygge Gallery
         </h1>
       </Link>
@@ -40,4 +40,3 @@ const NavBar: React.FC = () => {
 };
 
 export default NavBar;
-
