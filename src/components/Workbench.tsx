@@ -309,34 +309,26 @@ export const Workbench: React.FC = () => {
           <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-2 text-center">
             WHEN READY, CREATE & SHARE YOUR IMAGE
           </div>
-          {/* Create Image Bubble */}
-          <div className="
-            bg-white/90 rounded-2xl shadow-xl border-2 border-gray-100 px-6 py-6 w-full max-w-[340px] mx-auto
-            flex flex-col items-center space-y-3
-            animate-fade-in
-            backdrop-blur-[10px]
-            bg-gradient-to-tr from-white/60 via-pink-100/70 to-violet-50/90
-          ">
-            <Button
-              variant="default"
-              size="lg"
-              className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs font-bold shadow-lg transition hover:scale-[1.03]"
-              onClick={handleCreateImage}
-              disabled={!mainImage || !imprintedQuote}
-              aria-label={
-                !imprintedQuote
-                  ? "Select a quote to imprint before creating image"
-                  : "Create image with quote"
-              }
-            >
-              Create image
-            </Button>
-            {!imprintedQuote && (
-              <div className="text-xs text-gray-400 mt-1 text-center">
-                Select a quote above to imprint it on your image!
-              </div>
-            )}
-          </div>
+          {/* Create Image Button (standalone, not in bubble) */}
+          <Button
+            variant="default"
+            size="lg"
+            className="rounded-full px-8 py-3 font-playfair text-lg mt-1 w-full max-w-xs font-bold shadow-lg transition hover:scale-[1.03] mx-auto"
+            onClick={handleCreateImage}
+            disabled={!mainImage || !imprintedQuote}
+            aria-label={
+              !imprintedQuote
+                ? "Select a quote to imprint before creating image"
+                : "Create image with quote"
+            }
+          >
+            Create image
+          </Button>
+          {!imprintedQuote && (
+            <div className="text-xs text-gray-400 mt-1 text-center">
+              Select a quote above to imprint it on your image!
+            </div>
+          )}
         </section>
 
         {/* RIGHT PANEL: Main Image + Extra Images */}
