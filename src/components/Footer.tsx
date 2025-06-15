@@ -11,9 +11,10 @@ const Footer: React.FC = () => (
       <Link to="/about" className="hover:text-primary transition">About</Link>
     </nav>
     <div className="text-xs text-center text-gray-400 font-mono">
-      &copy; {new Date().getFullYear()} Emotivo &mdash; All rights reserved.
+      &copy; {new Date().getFullYear()} EmotivAI &mdash; All rights reserved.
     </div>
   </footer>
 );
 
 export default Footer;
+
