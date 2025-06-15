@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import { Menu } from "lucide-react";
@@ -12,7 +11,12 @@ const links = [{
 }, {
   name: "Gallery",
   to: "/gallery"
-}];
+},
+{
+  name: "About",
+  to: "/about"
+}
+];
 const NavBar: React.FC = () => {
   const {
     pathname
