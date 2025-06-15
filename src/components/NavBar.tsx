@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import { Menu } from "lucide-react";
@@ -41,11 +42,23 @@ const NavBar: React.FC = () => {
       <div className="md:hidden flex items-center">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <button className="p-2 rounded-full hover:bg-accent transition" aria-label="Open menu">
+            <button
+              className={`p-2 rounded-full transition
+                ${open
+                  ? 'bg-white shadow-lg border border-gray-200'
+                  : 'bg-white'
+                }`}
+              aria-label="Open menu"
+            >
               <Menu size={28} />
             </button>
           </PopoverTrigger>
-          <PopoverContent side="bottom" align="end" className="w-48 mt-2 px-0 py-2 rounded-xl shadow-lg">
+          {/* Modified PopoverContent for solid background */}
+          <PopoverContent
+            side="bottom"
+            align="end"
+            className="w-48 mt-2 px-0 py-2 rounded-xl shadow-lg bg-white border border-gray-200"
+          >
             <div className="flex flex-col gap-2">
               {links.map(({
               name,
