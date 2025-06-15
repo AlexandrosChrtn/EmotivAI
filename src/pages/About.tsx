@@ -17,7 +17,7 @@ const About: React.FC = () => (
         </p>
         <Link to="/workbench" className="inline-block">
           <button
-            className="font-playfair text-lg px-8 py-3 rounded-xl border-2 bg-gradient-to-r from-[#eecda3] to-[#ef629f] border-[#ef629f] text-white shadow transition-transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#ef629f] focus:ring-offset-2 active:scale-95"
+            className="font-playfair text-lg px-8 py-3 rounded-xl bg-gradient-to-r from-[#eecda3] to-[#ef629f] text-white shadow transition-transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#ef629f] focus:ring-offset-2 active:scale-95"
             type="button"
           >
             Create images
