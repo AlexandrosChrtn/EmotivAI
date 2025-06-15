@@ -221,7 +221,7 @@ export const Workbench: React.FC = () => {
               <SelectTrigger
                 className={`
                   font-playfair
-                  px-6 py-2 rounded-full border-2 border-white/50 font-bold 
+                  px-4 py-2 rounded-full border-2 border-white/50 font-bold 
                   transition focus:ring-2 focus:ring-primary/60 focus:outline-none
                   bg-white/80 shadow-sm
                   hover:bg-white
@@ -229,7 +229,6 @@ export const Workbench: React.FC = () => {
                   ring-1 ring-white/25
                   text-gray-900 
                   glass
-                  min-w-[130px]
                   select-dropdown
                   text-base
                   rounded-full
@@ -239,7 +238,9 @@ export const Workbench: React.FC = () => {
                   borderRadius: "99em",
                   background: "rgba(255,255,255,0.70)",
                   boxShadow: "0 2px 8px 0 rgba(200,130,205,0.09)",
-                  minWidth: 130,
+                  minWidth: 80,
+                  maxWidth: 120,
+                  width: 100,
                   outline: "none",
                   letterSpacing: ".02em",
                   WebkitBackdropFilter: "blur(6px)",
@@ -256,7 +257,8 @@ export const Workbench: React.FC = () => {
                   backdrop-blur-[8px]
                   rounded-2xl
                   py-2
-                  min-w-[160px]
+                  min-w-[110px]
+                  max-w-[140px]
                   z-50
                 `}
                 style={{
@@ -264,6 +266,8 @@ export const Workbench: React.FC = () => {
                   background: "rgba(255,255,255,0.93)",
                   boxShadow: "0 8px 24px 0 rgba(50,50,70,0.17)",
                   WebkitBackdropFilter: "blur(8px)",
+                  minWidth: 110,
+                  maxWidth: 140,
                 }}
                 position="popper"
                 sideOffset={8}
@@ -274,7 +278,7 @@ export const Workbench: React.FC = () => {
                       key={lbl.value}
                       value={lbl.value}
                       className={`
-                        font-playfair font-semibold text-base px-5 py-2
+                        font-playfair font-semibold text-base px-10 py-2
                         rounded-full my-1
                         focus:bg-primary/10
                         transition
@@ -282,6 +286,7 @@ export const Workbench: React.FC = () => {
                       style={{
                         fontFamily: "'Playfair Display', serif",
                         borderRadius: "99em",
+                        paddingLeft: '2.3rem', // ensures check icon is separated
                       }}
                     >
                       {lbl.text}
