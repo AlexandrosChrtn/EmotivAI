@@ -16,8 +16,11 @@ export const Workbench: React.FC = () => {
   // Use the first label as the default
   const [selected, setSelected] = React.useState(aiLabels[0].value);
 
-  // Filter images and messages for selected label
-  const labelImages = aiImages.filter((img) => img.label === selected);
+  // FIX: Filter images and messages for selected label, where label is now an array
+  const labelImages = aiImages.filter((img) =>
+    Array.isArray(img.label) ? img.label.includes(selected) : img.label === selected
+  );
+  
   // Show up to 5 images (main + 4 extra)
   const mainImage = labelImages[0]?.url || "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80";
   const extraImages = labelImages.slice(1, 5).map(i => i.url);
