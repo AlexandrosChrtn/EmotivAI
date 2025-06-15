@@ -69,6 +69,7 @@ export const Workbench: React.FC = () => {
             I need an image for&nbsp;
             <select
               className={`
+                font-playfair
                 px-4 py-2 rounded-full border-2 border-white/50 text-lg font-bold 
                 transition focus:ring-2 focus:ring-primary/60 focus:outline-none
                 bg-white/80 shadow-sm
@@ -83,6 +84,7 @@ export const Workbench: React.FC = () => {
               onChange={e => setSelected(e.target.value)}
               aria-label="Select a label"
               style={{
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "1.1em",
                 fontWeight: 700,
                 borderRadius: "2em",
@@ -96,7 +98,7 @@ export const Workbench: React.FC = () => {
               }}
             >
               {aiLabels.map(lbl => (
-                <option key={lbl.value} value={lbl.value} className="font-semibold">
+                <option key={lbl.value} value={lbl.value} className="font-semibold font-playfair">
                   {lbl.text}
                 </option>
               ))}
