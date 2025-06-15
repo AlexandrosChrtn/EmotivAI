@@ -299,16 +299,26 @@ export const Workbench: React.FC = () => {
         </div>
       </section>
 
-      {/* Main Content: Side by Side */}
-      <div className="w-full max-w-5xl flex flex-col-reverse md:flex-row gap-8 px-4 items-start justify-center">
+      {/* Main Content: Responsive & Centered Panels */}
+      <div
+        className="
+          w-full max-w-5xl flex flex-col-reverse md:flex-row gap-8 px-2 sm:px-4 items-center md:items-start justify-center
+        "
+      >
         {/* LEFT PANEL: Quotes + Create Button */}
-        <section className="flex-1 min-w-[285px] max-w-md flex flex-col gap-2 pb-6 md:pb-0 md:pr-8 order-2 md:order-1">
+        <section
+          className="
+            flex-1 min-w-[285px] max-w-md flex flex-col gap-2 pb-6 md:pb-0 md:pr-8
+            order-2 md:order-1
+            items-center md:items-start
+          "
+        >
           {/* Quotes Section Header */}
-          <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-2 pl-1">
+          <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-2 text-center w-full">
             CHOOSE QUOTE
           </div>
           {/* Quotes */}
-          <div className="flex flex-col gap-1 mb-4">
+          <div className="flex flex-col gap-1 mb-4 w-full items-center">
             {fourMessages.map(
               (msg, idx) =>
                 msg && (
@@ -318,7 +328,7 @@ export const Workbench: React.FC = () => {
                     className={`
                       relative
                       bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border shadow-lg transition
-                      min-h-[68px] min-w-full h-[68px] flex items-center justify-center text-center
+                      min-h-[68px] w-full h-[68px] flex items-center justify-center text-center
                       ${imprintedQuote === msg
                         ? "border-green-500 ring-2 ring-green-400 ring-offset-2 scale-[1.04] bg-primary/10 shadow-green-100/60"
                         : "border-white/60 hover:bg-white/100 hover:shadow-2xl"}
@@ -327,7 +337,7 @@ export const Workbench: React.FC = () => {
                       boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
                       cursor: "pointer",
                       minHeight: "68px",
-                      minWidth: "100%",
+                      width: "100%",
                       height: "68px",
                       display: "flex",
                       alignItems: "center",
@@ -353,10 +363,10 @@ export const Workbench: React.FC = () => {
             )}
           </div>
           {/* Create Image Section Header */}
-          <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-2 text-center">
+          <div className="text-xs font-bold uppercase text-gray-500 tracking-wide mb-2 text-center w-full">
             WHEN READY, CREATE & SHARE YOUR IMAGE
           </div>
-          {/* Create Image Button (standalone, not in bubble) */}
+          {/* Create Image Button */}
           <Button
             variant="default"
             size="lg"
@@ -380,21 +390,25 @@ export const Workbench: React.FC = () => {
             Create image
           </Button>
           {!imprintedQuote && (
-            <div className="text-xs text-gray-400 mt-1 text-center">
+            <div className="text-xs text-gray-400 mt-1 text-center w-full">
               Select a quote above to imprint it on your image!
             </div>
           )}
         </section>
 
         {/* RIGHT PANEL: Main Image + Extra Images */}
-        <section className="flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start order-1 md:order-2">
-          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase self-start">
-            Your image
+        <section
+          className="
+            flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start order-1 md:order-2
+          "
+        >
+          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase w-full text-center">
+            YOUR IMAGE
           </div>
           {/* Main Image */}
           {mainImage && (
             <div
-              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[425px] lg:h-[425px] hover:shadow-pink-200/50 transition-all duration-300"
+              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[80vw] max-w-[300px] sm:max-w-[400px] lg:max-w-[425px] h-[80vw] max-h-[300px] sm:max-h-[400px] lg:max-h-[425px] hover:shadow-pink-200/50 transition-all duration-300 mx-auto"
               style={{
                 boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
               }}
@@ -416,11 +430,12 @@ export const Workbench: React.FC = () => {
           {extraImages.length > 0 && (
             <div
               className="
-                w-[300px] sm:w-[400px] lg:w-[425px]
+                w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[425px]
                 mt-6 
                 grid
                 grid-cols-2
                 gap-4
+                mx-auto
               "
             >
               {extraImages.map((img, i) => (
@@ -437,9 +452,7 @@ export const Workbench: React.FC = () => {
                     cursor-pointer
                     hover:scale-105
                     transition-transform duration-200
-                    w-[142px] h-[142px]
-                    sm:w-[192px] sm:h-[192px]
-                    lg:w-[200px] lg:h-[200px]
+                    w-full h-full min-w-0 min-h-0
                   "
                   style={{
                     boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
