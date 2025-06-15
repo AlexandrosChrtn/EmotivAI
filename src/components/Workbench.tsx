@@ -270,6 +270,7 @@ export const Workbench: React.FC = () => {
                       key={idx}
                       className={`
                         bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg transition
+                        min-h-[68px] min-w-full h-[68px] flex items-center justify-center text-center
                         ${imprintedQuote === msg
                           ? "ring-2 ring-primary ring-offset-2 scale-[1.04] bg-primary/15 shadow-pink-100/60"
                           : "hover:bg-white/100 hover:shadow-2xl"}
@@ -277,6 +278,15 @@ export const Workbench: React.FC = () => {
                       style={{
                         boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
                         cursor: "pointer",
+                        minHeight: "68px",
+                        minWidth: "100%",
+                        height: "68px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        // Ensure word wrap for long quotes
+                        whiteSpace: "normal",
                       }}
                       onClick={() => setImprintedQuote(msg)}
                       aria-pressed={imprintedQuote === msg}
