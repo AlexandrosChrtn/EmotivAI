@@ -1,4 +1,3 @@
-
 export const labelColors = {
   morning: "bg-yellow-200 text-yellow-800 border-yellow-300",
   apology: "bg-blue-100 text-blue-700 border-blue-200",
@@ -13,44 +12,72 @@ export const aiImages = [
     id: "morning-1",
     url: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80",
     alt: "Yellow lights between trees in the morning",
-    label: "morning",
+    label: ["morning"],
     description: "Sun-dappled forest at sunrise"
   },
   {
     id: "apology-1",
     url: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=900&q=80",
     alt: "Sunlight passing through tree leaves (soft forgiving mood)",
-    label: "apology",
+    label: ["apology"],
     description: "Gentle light through leaves, a forgiving scene"
   },
   {
     id: "love-1",
     url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
     alt: "A couple holding hands on a bench",
-    label: "love",
+    label: ["love"],
     description: "Two people together on a bench"
   },
   {
     id: "motivation-1",
     url: "https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=900&q=80",
     alt: "Sheep on grass field with mountains",
-    label: "motivation",
+    label: ["motivation"],
     description: "A flock moving forward, progress and momentum"
   },
   {
     id: "knowledge-1",
     url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
     alt: "Woman reading a book by a window",
-    label: "knowledge",
+    label: ["knowledge"],
     description: "A scene with books, learning and growth"
   },
   {
     id: "night-1",
     url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=900&q=80",
     alt: "Blue starry night sky",
-    label: "night",
+    label: ["night"],
     description: "A calm, starlit night, feeling peaceful"
   },
+  {
+    id: "motivation-2-morning",
+    url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80",
+    alt: "Pathway through forest, golden sunrise",
+    label: ["morning", "motivation"],
+    description: "Early morning light on a forest path"
+  },
+  {
+    id: "apology-love-1",
+    url: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=900&q=80",
+    alt: "Hands holding gently, apology and love",
+    label: ["apology", "love"],
+    description: "A gentle touch showing care and forgiveness"
+  },
+  {
+    id: "night-knowledge-variation",
+    url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=80",
+    alt: "Reading under lamp at night",
+    label: ["night", "knowledge"],
+    description: "A person reading a book by lamplight at night"
+  },
+  {
+    id: "motivational-sunset",
+    url: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=900&q=80",
+    alt: "Sunset view inspiring motivation",
+    label: ["motivation", "love"],
+    description: "An inspiring sunset to motivate action and inspire love"
+  }
 ];
 
 export const aiLabels = [
