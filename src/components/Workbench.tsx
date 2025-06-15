@@ -1,4 +1,3 @@
-
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -42,45 +41,62 @@ export const Workbench: React.FC = () => {
     setDisplayedImages(newImages);
   };
 
+  // Get the pretty label text for display in the header
+  const prettyLabel = aiLabels.find(l => l.value === selected)?.text || selected;
+  const currentGradient = labelGradients[selected];
+
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
   const fourMessages = Array(4).fill("").map((_, i) => messages[i] || "");
 
   return (
     <main className="w-full flex flex-col items-center pt-4 pb-8 bg-hygge-1 min-h-screen">
-      {/* Call to Action Header */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 mb-8 px-4">
-        <div 
-          className="px-8 py-4 rounded-3xl shadow-xl bg-gradient-to-tr from-white/70 via-pink-50/80 to-indigo-50/70 border-2 border-white/40 backdrop-blur-lg"
+      {/* Unified "I need an image for {Label}" Header */}
+      <section
+        className={`w-full flex flex-col items-center justify-center mb-10 px-4`}
+      >
+        <div
+          className={`
+            w-full max-w-lg rounded-3xl border-2 border-white/50 shadow-xl 
+            bg-gradient-to-tr ${currentGradient} 
+            py-7 px-6 sm:px-10 flex flex-wrap items-center justify-center gap-3
+            backdrop-blur-md 
+            animate-fade-in
+          `}
           style={{
-            boxShadow: "0 20px 40px -12px rgba(0,0,0,0.1), 0 4px 25px 0px rgba(0,0,0,0.12)",
+            boxShadow: "0 16px 32px -8px rgba(0,0,0,0.07), 0 2px 18px 0px rgba(0,0,0,0.13)",
           }}
         >
-          <h1 className="font-playfair font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900 whitespace-nowrap">
-            I need an image for
-          </h1>
-        </div>
-        
-        <select
-          className={`rounded-xl px-6 py-4 border-2 border-white/50 font-bold text-lg sm:text-xl outline-none text-gray-900 shadow-xl cursor-pointer 
-            bg-gradient-to-tr ${labelGradients[selected]} transition-all duration-300 min-w-[160px] backdrop-blur-sm`}
-          value={selected}
-          onChange={e => setSelected(e.target.value)}
-          aria-label="Select a label"
-          style={{
-            boxShadow: "0 10px 30px -5px rgba(0,0,0,0.15)"
-          }}
-        >
-          {aiLabels.map(lbl => (
-            <option
-              key={lbl.value}
-              value={lbl.value}
-              className="font-semibold bg-white"
+          <h1 className="font-playfair font-bold text-2xl sm:text-3xl text-gray-900 whitespace-nowrap text-center">
+            I need an image for{" "}
+            <span
+              className="inline-block mx-1 px-3 py-1 rounded-lg font-bold bg-white/40 text-gray-900 text-xl sm:text-2xl transition-all shadow md:ml-1"
+              style={{
+                borderRadius: "1.1em",
+                border: "1.5px solid rgba(250,250,250,.26)",
+                background: "rgba(255,255,255,0.35)"
+              }}
             >
-              {lbl.text}
-            </option>
-          ))}
-        </select>
-      </div>
+              {prettyLabel}
+            </span>
+          </h1>
+          <select
+            className={`
+              ml-3 px-3 py-2 rounded-lg border-2 border-white/40 text-base font-bold transition 
+              focus:ring-2 focus:ring-primary focus:outline-none bg-white/80 shadow
+              mt-4 sm:mt-0
+            `}
+            value={selected}
+            onChange={e => setSelected(e.target.value)}
+            aria-label="Select a label"
+          >
+            {aiLabels.map(lbl => (
+              <option key={lbl.value} value={lbl.value} className="font-semibold">
+                {lbl.text}
+              </option>
+            ))}
+          </select>
+        </div>
+      </section>
 
       {/* Main Content Grid */}
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 px-4">
