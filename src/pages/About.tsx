@@ -3,6 +3,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import { GradientBackground } from "../components/GradientBackground";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const About: React.FC = () => (
   <GradientBackground>
@@ -25,6 +26,7 @@ const About: React.FC = () => (
         </Link>
       </div>
     </section>
+    <Footer />
   </GradientBackground>
 );
 
