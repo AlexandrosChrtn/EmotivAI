@@ -1,6 +1,3 @@
-
-// Cozy homepage demo for Hygge-style site with demo images and quotes
-
 import React from "react";
 import NavBar from "../components/NavBar";
 import { GradientBackground } from "../components/GradientBackground";
@@ -15,8 +12,7 @@ const Index = () => {
           I need an image for...
         </h2>
         <p className="text-lg sm:text-xl text-muted-foreground max-w-xl text-center mb-7 font-medium leading-relaxed">
-          Make your words memorable—pair your message with a beautiful image and the perfect quote.<br />
-          Instantly convey warmth, comfort, or inspiration and delight someone with a thoughtful visual touch.
+          Convey your feelings with a beautiful image and a perfect quote
         </p>
       </div>
       <DemoGrid />
