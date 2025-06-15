@@ -34,11 +34,25 @@ export const Workbench: React.FC = () => {
   }, []);
   const [displayedImages, setDisplayedImages] = React.useState(getFirstFiveImages(selected));
 
-  // When label changes, reset displayedImages to first 5 for new label
+  // The color background uses labelGradients based on selected.
+  const currentGradient = labelGradients[selected];
+
+  const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
+  const fourMessages = Array(4)
+    .fill("")
+    .map((_, i) => messages[i] || "");
+
+  // ----------- Imprinting Quote and Creating Image ------------
+  // Set initial imprintedQuote to the first quote
+  const [imprintedQuote, setImprintedQuote] = React.useState<string>(fourMessages[0]);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [generatedDataUrl, setGeneratedDataUrl] = React.useState<string>("");
+
+  // When label changes, reset images and set imprintedQuote to first quote for the label
   React.useEffect(() => {
     setDisplayedImages(getFirstFiveImages(selected));
-    setImprintedQuote(""); // reset quote when label changes
-  }, [selected, getFirstFiveImages]);
+    setImprintedQuote(messages[0] || ""); // default to first quote
+  }, [selected, getFirstFiveImages, messages]);
 
   const mainImage = displayedImages[0]?.url || "";
   const extraImages = displayedImages.slice(1);
@@ -51,24 +65,6 @@ export const Workbench: React.FC = () => {
     newImages[0] = newMain;
     newImages[imgIdx + 1] = main;
     setDisplayedImages(newImages);
-  };
-
-  // The color background uses labelGradients based on selected.
-  const currentGradient = labelGradients[selected];
-
-  const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
-  const fourMessages = Array(4)
-    .fill("")
-    .map((_, i) => messages[i] || "");
-
-  // ----------- New for Imprinting Quote and Creating Image ------------
-  const [imprintedQuote, setImprintedQuote] = React.useState<string>("");
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [generatedDataUrl, setGeneratedDataUrl] = React.useState<string>("");
-
-  // Allow clicking quote card to imprint + visually highlight selected
-  const handleQuoteClick = (q: string) => {
-    setImprintedQuote(q);
   };
 
   // Helper to create image with quote overlay via canvas
@@ -258,7 +254,11 @@ export const Workbench: React.FC = () => {
       {/* Main Content Grid */}
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 px-4">
         {/* LEFT: Main Image */}
-        <section className="flex justify-center">
+        <section className="flex flex-col items-center justify-center">
+          {/* Section Title */}
+          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase">
+            Your image
+          </div>
           {mainImage && (
             <div
               className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center 
@@ -285,31 +285,37 @@ export const Workbench: React.FC = () => {
 
         {/* RIGHT: Quotes and Extra Images */}
         <section className="flex flex-col gap-6">
-          {/* Quotes */}
-          <div className="flex flex-col gap-3">
-            {fourMessages.map(
-              (msg, idx) =>
-                msg && (
-                  <button
-                    type="button"
-                    key={idx}
-                    className={`
-                      bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg transition
-                      ${imprintedQuote === msg
-                        ? "ring-2 ring-primary ring-offset-2 scale-[1.04] bg-primary/15 shadow-pink-100/60"
-                        : "hover:bg-white/100 hover:shadow-2xl"}
-                    `}
-                    style={{
-                      boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleQuoteClick(msg)}
-                    aria-pressed={imprintedQuote === msg}
-                  >
-                    {msg}
-                  </button>
-                )
-            )}
+          {/* Quotes Section Title */}
+          <div className="flex flex-col gap-1">
+            <div className="text-xs font-semibold text-gray-500 tracking-wide uppercase mb-1 pl-1">
+              Choose quote
+            </div>
+            {/* Quotes */}
+            <div className="flex flex-col gap-3">
+              {fourMessages.map(
+                (msg, idx) =>
+                  msg && (
+                    <button
+                      type="button"
+                      key={idx}
+                      className={`
+                        bg-white/90 rounded-xl px-5 py-3 text-base lg:text-lg text-gray-800 font-playfair border border-white/60 shadow-lg transition
+                        ${imprintedQuote === msg
+                          ? "ring-2 ring-primary ring-offset-2 scale-[1.04] bg-primary/15 shadow-pink-100/60"
+                          : "hover:bg-white/100 hover:shadow-2xl"}
+                      `}
+                      style={{
+                        boxShadow: "0 8px 25px -8px rgba(0,0,0,0.1)",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setImprintedQuote(msg)}
+                      aria-pressed={imprintedQuote === msg}
+                    >
+                      {msg}
+                    </button>
+                  )
+              )}
+            </div>
           </div>
 
           {/* Extra Images */}
