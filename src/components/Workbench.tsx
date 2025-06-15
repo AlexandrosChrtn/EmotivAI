@@ -1,4 +1,3 @@
-
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -16,20 +15,15 @@ export const Workbench: React.FC = () => {
   // Use the first label as the default
   const [selected, setSelected] = React.useState(aiLabels[0].value);
 
-  // FIX: Filter images and messages for selected label, where label is now an array
+  // Filter images for selected label.
   const labelImages = aiImages.filter((img) =>
     Array.isArray(img.label) ? img.label.includes(selected) : img.label === selected
   );
   
-  // Show up to 5 images (main + 4 extra)
-  const mainImage = labelImages[0]?.url || "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80";
-  const extraImages = labelImages.slice(1, 5).map(i => i.url);
-  // If less than 5 images, fill with placeholder(s)
-  while (extraImages.length < 4) {
-    extraImages.push(
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80"
-    );
-  }
+  // Show up to 5 unique images (no repeats, no placeholders).
+  const firstFiveImages = labelImages.slice(0, 5);
+  const mainImage = firstFiveImages[0]?.url || "";
+  const extraImages = firstFiveImages.slice(1).map(i => i.url);
 
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
   const fourMessages = Array(4)
@@ -92,15 +86,17 @@ export const Workbench: React.FC = () => {
         {/* RIGHT: Images grid */}
         <section className="flex flex-col gap-4">
           {/* Main image */}
-          <div className="rounded-2xl overflow-hidden border border-white/60 shadow-xl mb-0 h-[240px] w-full flex justify-center items-center bg-white/60">
-            <img
-              src={mainImage}
-              alt="Main generated"
-              className="w-full h-full object-cover object-center"
-              style={{ maxHeight: 240, borderRadius: "1.25rem" }}
-              draggable={false}
-            />
-          </div>
+          {mainImage && (
+            <div className="rounded-2xl overflow-hidden border border-white/60 shadow-xl mb-0 h-[240px] w-full flex justify-center items-center bg-white/60">
+              <img
+                src={mainImage}
+                alt="Main generated"
+                className="w-full h-full object-cover object-center"
+                style={{ maxHeight: 240, borderRadius: "1.25rem" }}
+                draggable={false}
+              />
+            </div>
+          )}
           {/* Extra images in a grid */}
           <div className="grid grid-cols-4 gap-3">
             {extraImages.map((url, i) => (

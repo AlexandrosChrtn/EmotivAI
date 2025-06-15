@@ -12,42 +12,42 @@ export const aiImages = [
     id: "morning-1",
     url: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80",
     alt: "Yellow lights between trees in the morning",
-    label: ["morning"],
+    label: ["morning", "motivation"],
     description: "Sun-dappled forest at sunrise"
   },
   {
     id: "apology-1",
     url: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=900&q=80",
     alt: "Sunlight passing through tree leaves (soft forgiving mood)",
-    label: ["apology"],
+    label: ["apology", "knowledge"],
     description: "Gentle light through leaves, a forgiving scene"
   },
   {
     id: "love-1",
     url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
     alt: "A couple holding hands on a bench",
-    label: ["love"],
+    label: ["love", "apology"],
     description: "Two people together on a bench"
   },
   {
     id: "motivation-1",
     url: "https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=900&q=80",
     alt: "Sheep on grass field with mountains",
-    label: ["motivation"],
+    label: ["motivation", "morning"],
     description: "A flock moving forward, progress and momentum"
   },
   {
     id: "knowledge-1",
     url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
     alt: "Woman reading a book by a window",
-    label: ["knowledge"],
+    label: ["knowledge", "night"],
     description: "A scene with books, learning and growth"
   },
   {
     id: "night-1",
     url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=900&q=80",
     alt: "Blue starry night sky",
-    label: ["night"],
+    label: ["night", "knowledge"],
     description: "A calm, starlit night, feeling peaceful"
   },
   {
@@ -77,6 +77,34 @@ export const aiImages = [
     alt: "Sunset view inspiring motivation",
     label: ["motivation", "love"],
     description: "An inspiring sunset to motivate action and inspire love"
+  },
+  {
+    id: "variation-1",
+    url: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=900&q=80",
+    alt: "Calm lakeside sunrise",
+    label: ["morning", "love"],
+    description: "A calm lakeside in the morning, romantic vibes"
+  },
+  {
+    id: "variation-2",
+    url: "https://images.unsplash.com/photo-1465101046530-c6a2dfcdf7d6?auto=format&fit=crop&w=900&q=80",
+    alt: "Couple walking in forest illuminated by sunrise",
+    label: ["love", "morning"],
+    description: "Couple walking through a sunlit forest"
+  },
+  {
+    id: "variation-3",
+    url: "https://images.unsplash.com/photo-1465101178521-c1a9136a2764?auto=format&fit=crop&w=900&q=80",
+    alt: "A cozy reading nook by the window at dusk",
+    label: ["night", "motivation"],
+    description: "Reading at dusk, a motivational time"
+  },
+  {
+    id: "variation-4",
+    url: "https://images.unsplash.com/photo-1466354424719-343280fe118b?auto=format&fit=crop&w=900&q=80",
+    alt: "A person gazing at the stars with a book",
+    label: ["knowledge", "night"],
+    description: "Stargazing and learning at night"
   }
 ];
 
