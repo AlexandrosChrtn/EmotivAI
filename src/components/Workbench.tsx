@@ -305,12 +305,93 @@ export const Workbench: React.FC = () => {
           w-full max-w-5xl flex flex-col-reverse md:flex-row gap-8 px-2 sm:px-4 items-center md:items-start justify-center
         "
       >
+        {/* RIGHT PANEL: Main Image + Extra Images */}
+        <section
+          className="
+            flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start
+            order-1
+            md:order-2
+          "
+        >
+          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase w-full text-center">
+            YOUR IMAGE
+          </div>
+          {/* Main Image */}
+          {mainImage && (
+            <div
+              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[80vw] max-w-[300px] sm:max-w-[400px] lg:max-w-[425px] h-[80vw] max-h-[300px] sm:max-h-[400px] lg:max-h-[425px] hover:shadow-pink-200/50 transition-all duration-300 mx-auto"
+              style={{
+                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
+              }}
+            >
+              <img
+                src={mainImage}
+                alt="Main generated"
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+              {imprintedQuote && (
+                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-[84%] max-w-[96%]">
+                  <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
+                </div>
+              )}
+            </div>
+          )}
+          {/* Extra Images grid below */}
+          {extraImages.length > 0 && (
+            <div
+              className="
+                w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[425px]
+                mt-6 
+                grid
+                grid-cols-2
+                gap-4
+                mx-auto
+              "
+            >
+              {extraImages.map((img, i) => (
+                <div
+                  key={i}
+                  className="
+                    rounded-xl
+                    overflow-hidden
+                    border-2 border-white/60
+                    shadow-lg
+                    bg-white/60
+                    aspect-square
+                    flex items-center justify-center
+                    cursor-pointer
+                    hover:scale-105
+                    transition-transform duration-200
+                    w-full h-full min-w-0 min-h-0
+                  "
+                  style={{
+                    boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
+                  }}
+                  onClick={() => handleExtraImageClick(i)}
+                  tabIndex={0}
+                  aria-label="Use this image as main"
+                  title="Click to make main image"
+                >
+                  <img
+                    src={img.url}
+                    alt={`Generated for ${selected}`}
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
         {/* LEFT PANEL: Quotes + Create Button */}
         <section
           className="
             flex-1 min-w-[285px] max-w-md flex flex-col gap-2 pb-6 md:pb-0 md:pr-8
-            order-2 md:order-1
             items-center md:items-start
+            order-2
+            md:order-1
           "
         >
           {/* Quotes Section Header */}
@@ -392,84 +473,6 @@ export const Workbench: React.FC = () => {
           {!imprintedQuote && (
             <div className="text-xs text-gray-400 mt-1 text-center w-full">
               Select a quote above to imprint it on your image!
-            </div>
-          )}
-        </section>
-
-        {/* RIGHT PANEL: Main Image + Extra Images */}
-        <section
-          className="
-            flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start order-1 md:order-2
-          "
-        >
-          <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase w-full text-center">
-            YOUR IMAGE
-          </div>
-          {/* Main Image */}
-          {mainImage && (
-            <div
-              className="relative rounded-2xl overflow-hidden border-3 border-white/70 shadow-2xl bg-white/40 aspect-square flex justify-center items-center w-[80vw] max-w-[300px] sm:max-w-[400px] lg:max-w-[425px] h-[80vw] max-h-[300px] sm:max-h-[400px] lg:max-h-[425px] hover:shadow-pink-200/50 transition-all duration-300 mx-auto"
-              style={{
-                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
-              }}
-            >
-              <img
-                src={mainImage}
-                alt="Main generated"
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-              {imprintedQuote && (
-                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-[84%] max-w-[96%]">
-                  <GlassTextOverlay quote={imprintedQuote} theme={selected as any} />
-                </div>
-              )}
-            </div>
-          )}
-          {/* Extra Images grid below */}
-          {extraImages.length > 0 && (
-            <div
-              className="
-                w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[425px]
-                mt-6 
-                grid
-                grid-cols-2
-                gap-4
-                mx-auto
-              "
-            >
-              {extraImages.map((img, i) => (
-                <div
-                  key={i}
-                  className="
-                    rounded-xl
-                    overflow-hidden
-                    border-2 border-white/60
-                    shadow-lg
-                    bg-white/60
-                    aspect-square
-                    flex items-center justify-center
-                    cursor-pointer
-                    hover:scale-105
-                    transition-transform duration-200
-                    w-full h-full min-w-0 min-h-0
-                  "
-                  style={{
-                    boxShadow: "0 10px 25px -8px rgba(0,0,0,0.12)",
-                  }}
-                  onClick={() => handleExtraImageClick(i)}
-                  tabIndex={0}
-                  aria-label="Use this image as main"
-                  title="Click to make main image"
-                >
-                  <img
-                    src={img.url}
-                    alt={`Generated for ${selected}`}
-                    className="w-full h-full object-cover"
-                    draggable={false}
-                  />
-                </div>
-              ))}
             </div>
           )}
         </section>
