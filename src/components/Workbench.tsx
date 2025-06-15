@@ -1,219 +1,96 @@
+
 import React from "react";
-import { demoImages, demoQuotes, aiLabels, aiImages, aiQuotes } from "../data/demo";
-import { GlassTextOverlay } from "./GlassTextOverlay";
-import { LabelBadge } from "./LabelBadge";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "./ui/select";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
+import { aiLabels, aiQuotes } from "../data/demo";
 
-type WorkbenchMode = "manual" | "ai";
+const labelGradients: Record<string, string> = {
+  morning: "from-yellow-300/70 via-orange-200/70 to-yellow-100/80",
+  apology: "from-blue-200/70 via-blue-100/70 to-blue-50/80",
+  love: "from-rose-200/70 via-pink-100/70 to-rose-50/80",
+  motivation: "from-teal-200/70 via-green-100/70 to-teal-50/80",
+  knowledge: "from-violet-200/70 via-indigo-100/70 to-violet-50/80",
+  night: "from-blue-800/90 via-slate-600/80 to-blue-500/70",
+};
 
-// simple local state demo: select image, select quote, see preview
+function gradientBadge(label: string, children: React.ReactNode) {
+  return (
+    <span
+      className={`rounded-xl px-4 py-2 font-bold text-base text-gray-900 whitespace-nowrap shadow-sm bg-gradient-to-tr ${labelGradients[label] || "from-gray-200 to-gray-100"}`}
+      style={{ letterSpacing: "0.03em", minWidth: 120, display: "inline-block", textAlign: "center"}}
+    >
+      {children}
+    </span>
+  );
+}
 
 export const Workbench: React.FC = () => {
-  const [mode, setMode] = React.useState<"manual" | "ai">("ai");
+  const [selected, setSelected] = React.useState(aiLabels[0].value);
 
-  // AI Mode state
-  const [selectedLabel, setSelectedLabel] = React.useState(aiLabels[0].value);
-  const activeImage =
-    aiImages.find((img) => img.label === selectedLabel) || aiImages[0];
-  const relatedQuotes = aiQuotes[selectedLabel as keyof typeof aiQuotes];
-  const [selectedQuote, setSelectedQuote] = React.useState(
-    relatedQuotes[0] || ""
-  );
-
-  React.useEffect(() => {
-    // Change quote when label changes
-    setSelectedQuote(relatedQuotes[0]);
-  }, [selectedLabel]);
-
-  const [img, setImg] = React.useState(demoImages[0]);
-  const [qIdx, setQIdx] = React.useState(0);
-
-  const quote = demoQuotes[qIdx];
+  // Ensure 4 messages - fallback to empty strings if not enough
+  const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
+  const fourMessages = Array(4)
+    .fill("")
+    .map((_, i) => messages[i] || "");
 
   return (
-    <main className="w-full max-w-4xl mx-auto py-8">
-      {/* Mode switcher */}
-      <div className="flex justify-center mb-6 gap-2">
-        <Button
-          variant={mode === "ai" ? "default" : "outline"}
-          onClick={() => setMode("ai")}
-          className="min-w-[96px]"
-        >
-          AI Generator
-        </Button>
-        <Button
-          variant={mode === "manual" ? "default" : "outline"}
-          onClick={() => setMode("manual")}
-          className="min-w-[96px]"
-        >
-          Manual
-        </Button>
-      </div>
-      {/* --- AI Generator Mode --- */}
-      {mode === "ai" && (
-        <section>
-          <h2 className="font-playfair text-3xl sm:text-4xl font-bold mb-4 text-center text-primary">
-            AI Image Generator
-          </h2>
-          <div className="flex flex-col items-center gap-8">
-            {/* Label (Use) selection */}
-            <div className="w-full max-w-xs">
-              <label
-                htmlFor="use-select"
-                className="block mb-1 text-base font-semibold text-muted-foreground"
-              >
-                Get me an image for...
-              </label>
-              <Select
-                value={selectedLabel}
-                onValueChange={(val) => setSelectedLabel(val)}
-              >
-                <SelectTrigger id="use-select">
-                  <SelectValue placeholder="Choose a theme..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {aiLabels.map((lbl) => (
-                    <SelectItem key={lbl.value} value={lbl.value}>
-                      <span className="inline-flex items-center gap-2">
-                        <LabelBadge label={lbl.value as keyof typeof aiQuotes} />
-                        {lbl.text}
-                      </span>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            {/* Selected Image & Description */}
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="relative">
-                <img
-                  src={activeImage.url}
-                  alt={activeImage.alt}
-                  className="rounded-2xl shadow-lg w-[320px] h-[300px] sm:w-[340px] sm:h-[320px] object-cover mb-2"
-                  draggable={false}
-                  style={{ border: "2.5px solid #fff" }}
-                />
-                <div className="absolute top-3 left-3">
-                  <LabelBadge label={activeImage.label as keyof typeof aiQuotes} />
-                </div>
-              </div>
-              <div className="space-y-2 min-w-[190px]">
-                <div className="text-muted-foreground italic text-base">
-                  {activeImage.description}
-                </div>
-                <div className="mt-2">
-                  <span className="font-bold text-sm text-gray-700">
-                    Select your favorite message:
-                  </span>
-                  <div className="flex flex-col gap-2 mt-1">
-                    {relatedQuotes.map((qt) => (
-                      <Button
-                        key={qt}
-                        variant={selectedQuote === qt ? "default" : "secondary"}
-                        className={cn(
-                          "w-full text-left whitespace-normal",
-                          selectedQuote === qt
-                            ? "border-primary bg-gradient-to-r from-yellow-50 via-white to-yellow-100" : "border"
-                        )}
-                        onClick={() => setSelectedQuote(qt)}
-                      >
-                        <span>{qt}</span>
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Display chosen quote below image on colored card */}
-            <div className="mt-6 px-8 py-5 rounded-xl bg-white/90 shadow border flex flex-col items-center gap-2 max-w-lg mx-auto">
-              <LabelBadge
-                label={selectedLabel as keyof typeof aiQuotes}
-                className="mb-1"
-              />
-              <span className="block text-lg text-center font-playfair font-semibold text-primary tracking-tight">
-                {selectedQuote}
-              </span>
-            </div>
+    <main className="min-h-screen w-full flex flex-col items-center justify-center bg-hygge-1 px-2 py-12">
+      <div className="bg-white/70 rounded-3xl shadow-lg px-6 py-8 flex flex-col items-center gap-8 max-w-xl w-full border border-white/40">
+        {/* Prompt */}
+        <div className="w-full flex flex-col items-center gap-4">
+          <div className="bg-white rounded-xl p-4 shadow border font-semibold text-lg mb-1 text-gray-900 w-full text-center">
+            Get me an image for...
           </div>
-        </section>
-      )}
-      {/* --- Manual mode (keep unchanged for now) --- */}
-      {mode === "manual" && (
-        <section>
-          <h2 className="font-playfair text-3xl sm:text-4xl font-bold mb-6 text-center text-primary">
-            Your Cozy Creation
-          </h2>
-          <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
-            {/* Image selector */}
-            <div className="space-y-3 w-full md:w-[220px]">
-              <h3 className="text-lg font-semibold text-muted-foreground mb-1">Choose an image:</h3>
-              <div className="grid grid-cols-3 gap-4">
-                {demoImages.map((di) => (
-                  <button
-                    className={`focus:outline-none transition-[transform,box-shadow] border-2 rounded-xl p-0.5 ${
-                      img.id === di.id
-                        ? "border-primary scale-105 ring-2 ring-primary/30"
-                        : "border-transparent"
-                    }`}
-                    onClick={() => setImg(di)}
-                    key={di.id}
-                  >
-                    <img
-                      src={di.url}
-                      alt={di.alt}
-                      className="object-cover w-full h-20 rounded-lg"
-                      draggable={false}
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-            {/* Quote selector */}
-            <div className="space-y-3 w-full md:w-[350px]">
-              <h3 className="text-lg font-semibold text-muted-foreground mb-1">Choose a positive message:</h3>
-              <div className="max-h-64 overflow-auto grid grid-cols-1 gap-2">
-                {demoQuotes.map((q, idx) => (
-                  <button
-                    className={`text-left bg-white/70 px-4 py-2 rounded-lg border w-full shadow transition-all ${
-                      qIdx === idx
-                        ? "bg-gradient-to-r from-rose-100 via-slate-50 to-yellow-100 border-primary text-primary font-bold"
-                        : "border-transparent hover:bg-gradient-to-r hover:from-yellow-50 hover:to-rose-50"
-                    }`}
-                    onClick={() => setQIdx(idx)}
+          {/* Label dropdown */}
+          <div className="w-full flex justify-center">
+            <select
+              className={`rounded-xl px-4 py-2 border shadow bg-gradient-to-tr ${labelGradients[selected]} font-bold text-base outline-none select-none`}
+              style={{ minWidth: 180 }}
+              value={selected}
+              onChange={(e) => setSelected(e.target.value)}
+              aria-label="Select a label"
+            >
+              {aiLabels.map((lbl) => (
+                <option
+                  key={lbl.value}
+                  value={lbl.value}
+                  className={`font-semibold`}
+                  style={{
+                    color: "#291b1b",
+                  }}
+                >
+                  {lbl.text}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        {/* Show label and messages */}
+        <div className="flex flex-col items-center w-full gap-4">
+          <div className="mb-1">{gradientBadge(selected, aiLabels.find((l) => l.value === selected)?.text || selected)}</div>
+          {/* Placeholder image */}
+          <div className="rounded-2xl overflow-hidden shadow-md border border-white/60 mb-2">
+            <img
+              src="https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=520&q=80"
+              alt="Placeholder"
+              className="w-[320px] h-[230px] object-cover"
+              draggable={false}
+            />
+          </div>
+          <div className="flex flex-col gap-3 w-full">
+            {fourMessages.map(
+              (msg, idx) =>
+                msg && (
+                  <div
+                    className="bg-white/80 rounded-lg px-4 py-2 text-base text-gray-800 font-playfair border border-gray-200 shadow-sm"
                     key={idx}
                   >
-                    <span className="block text-base font-playfair">{q.text}</span>
-                    <span className="block text-xs text-muted-foreground">{q.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-            {/* Preview */}
-            <div className="w-full max-w-sm min-w-[270px] flex items-center justify-center">
-              <div className="relative rounded-2xl shadow-xl overflow-hidden transition-all min-h-[350px] min-w-[260px]">
-                <img
-                  src={img.url}
-                  alt={img.alt}
-                  className="object-cover w-full h-80 brightness-97"
-                  draggable={false}
-                />
-                <GlassTextOverlay quote={quote.text} theme={quote.label as any} />
-              </div>
-            </div>
+                    {msg}
+                  </div>
+                )
+            )}
           </div>
-          <div className="text-center text-muted-foreground mt-8 text-sm">
-            (Combine images and quotes to create your own cozy, hygge-inspired message!)
-          </div>
-        </section>
-      )}
+        </div>
+      </div>
     </main>
   );
 };
+
