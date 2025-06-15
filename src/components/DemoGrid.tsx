@@ -1,0 +1,26 @@
+
+import React from "react";
+import { demoImages, demoQuotes } from "../data/demo";
+import { GlassTextOverlay } from "./GlassTextOverlay";
+
+// Demo: pairs images with one quote each (cycle through both arrays)
+export const DemoGrid: React.FC = () => {
+  return (
+    <section className="w-full max-w-7xl mx-auto py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {demoImages.map((img, i) => {
+        const quote = demoQuotes[i % demoQuotes.length];
+        return (
+          <div key={img.id} className="relative group overflow-hidden rounded-2xl shadow-xl bg-white/10 animate-fade-in transition-all min-h-[380px] flex items-center justify-center">
+            <img
+              src={img.url}
+              alt={img.alt}
+              className="gallery-img object-cover h-80 w-full brightness-97 transition-all duration-300 group-hover:scale-105"
+              draggable={false}
+            />
+            <GlassTextOverlay quote={quote.text} theme={quote.theme as any} />
+          </div>
+        );
+      })}
+    </section>
+  );
+};

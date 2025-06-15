@@ -1,0 +1,56 @@
+
+export const demoImages = [
+  {
+    id: "cozy-1",
+    url: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=900&q=80",
+    alt: "A woman sitting on a bed using a laptop"
+  },
+  {
+    id: "cozy-2",
+    url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
+    alt: "Turned on gray laptop computer"
+  },
+  {
+    id: "cozy-3",
+    url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
+    alt: "Woman in white sleeve shirt using black laptop"
+  },
+  {
+    id: "cozy-4",
+    url: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=900&q=80",
+    alt: "Yellow lights between trees"
+  },
+  {
+    id: "cozy-5",
+    url: "https://images.unsplash.com/photo-1517022812141-23620dba5c23?auto=format&fit=crop&w=900&q=80",
+    alt: "Herd of sheep on green grass"
+  },
+  {
+    id: "cozy-6",
+    url: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=900&q=80",
+    alt: "Orange and white tabby cat lying on floral textile"
+  }
+];
+
+export const demoQuotes = [
+  // Good Morning
+  { label: "Good morning", text: "Good morning! Each sunrise brings a new beginning.", theme: "morning" },
+  { label: "Good morning", text: "Rise and shine—today is full of cozy possibilities!", theme: "morning" },
+  { label: "Good morning", text: "Embrace today with a warm heart and an open mind.", theme: "morning" },
+  // Love
+  { label: "Love", text: "Love is the gentle warmth that lights every home.", theme: "love" },
+  { label: "Love", text: "Let your heart be soft, your words kind, and your love endless.", theme: "love" },
+  { label: "Love", text: "The simplest things, done with love, are the most precious.", theme: "love" },
+  // Knowledge
+  { label: "Knowledge", text: "A curious mind is a cozy mind—never stop learning.", theme: "knowledge" },
+  { label: "Knowledge", text: "Knowledge is a warm cup of tea on a chilly day—enriching and comforting.", theme: "knowledge" },
+  { label: "Knowledge", text: "Reading fills the soul with the gentle glow of wisdom.", theme: "knowledge" },
+  // Motivation
+  { label: "Motivation", text: "Little steps can take you to wonderful places.", theme: "motivation" },
+  { label: "Motivation", text: "Even the coziest moments can spark the greatest dreams.", theme: "motivation" },
+  { label: "Motivation", text: "You are capable of beautiful things—start today!", theme: "motivation" },
+  // Good night
+  { label: "Good night", text: "Good night! Rest your dreams on a bed of possibility.", theme: "night" },
+  { label: "Good night", text: "May your night be filled with peace, warmth, and sweet dreams.", theme: "night" },
+  { label: "Good night", text: "The stars are cozy lights comforting you to sleep.", theme: "night" },
+];
