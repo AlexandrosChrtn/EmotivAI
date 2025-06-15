@@ -198,6 +198,7 @@ export const Workbench: React.FC = () => {
     <main className="w-full flex flex-col items-center pt-4 pb-8 bg-hygge-1 min-h-screen">
       {/* Unified "I need an image for {LabelDropdown}" Header */}
       <section className="w-full flex flex-col items-center justify-center mb-10 px-4">
+        {/* Unified "I need an image for {LabelDropdown}" Header */}
         <div
           className={`
             w-full max-w-lg rounded-3xl border-2 border-white/50 shadow-xl 
@@ -302,15 +303,15 @@ export const Workbench: React.FC = () => {
       {/* Main Content: Responsive & Centered Panels */}
       <div
         className="
-          w-full max-w-5xl flex flex-col-reverse md:flex-row gap-8 px-2 sm:px-4 items-center md:items-start justify-center
+          w-full max-w-5xl flex flex-col md:flex-row gap-8 px-2 sm:px-4 items-center md:items-start justify-center
         "
       >
-        {/* RIGHT PANEL: Main Image + Extra Images */}
+        {/* IMAGE PANEL: on mobile, appears first */}
         <section
           className="
             flex-1 min-w-[285px] max-w-lg flex flex-col items-center justify-start
             order-1
-            md:order-2
+            md:order-1
           "
         >
           <div className="text-xs font-semibold text-gray-500 mb-1 tracking-wide uppercase w-full text-center">
@@ -385,13 +386,13 @@ export const Workbench: React.FC = () => {
           )}
         </section>
 
-        {/* LEFT PANEL: Quotes + Create Button */}
+        {/* QUOTE PANEL: on mobile, appears second */}
         <section
           className="
             flex-1 min-w-[285px] max-w-md flex flex-col gap-2 pb-6 md:pb-0 md:pr-8
             items-center md:items-start
             order-2
-            md:order-1
+            md:order-2
           "
         >
           {/* Quotes Section Header */}
