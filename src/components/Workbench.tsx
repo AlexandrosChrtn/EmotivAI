@@ -1,4 +1,3 @@
-
 import React from "react";
 import { aiLabels, aiImages, aiQuotes } from "../data/demo";
 
@@ -44,84 +43,102 @@ export const Workbench: React.FC = () => {
   const messages = (aiQuotes as Record<string, string[]>)[selected] ?? [];
   const fourMessages = Array(4).fill("").map((_, i) => messages[i] || "");
 
+  // MAIN + new Layout
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start bg-hygge-1 px-2 pt-6 pb-0">
-      <div
-        className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start"
-        style={{ alignItems: "start" }}
-      >
-        {/* LEFT: Prompt bar + 4 messages */}
-        <section className="flex flex-col gap-5 md:gap-7 mt-1">
-          {/* Prompt bar */}
-          <div className="flex rounded-2xl shadow border font-semibold text-lg text-gray-900 bg-gradient-to-tr from-white via-white/90 to-white px-3 py-3 items-center w-full">
-            <span className="text-base md:text-lg mr-3 select-none font-medium">
-              I need an image for
-            </span>
-            <select
-              className={`rounded-xl px-4 py-2 border-none font-bold text-base outline-none ml-2
-                text-gray-900 shadow-sm cursor-pointer bg-gradient-to-tr transition-colors min-w-[150px]
-                ${labelGradients[selected]} duration-200`}
-              value={selected}
-              onChange={e => setSelected(e.target.value)}
-              aria-label="Select a label"
+    <main className="min-h-screen w-full flex flex-col items-center justify-start bg-hygge-1 px-1 pt-3 pb-0">
+      {/* Header */}
+      <h1 className="w-full text-center text-2xl md:text-4xl font-extrabold font-playfair mb-2 md:mb-4 leading-tight">
+        I need an image for
+      </h1>
+      {/* Fancy select below header, centered */}
+      <div className="flex justify-center w-full mb-3 md:mb-6">
+        <select
+          className={`rounded-xl px-5 py-2 border-none font-bold text-lg outline-none
+            text-gray-900 shadow-sm cursor-pointer bg-gradient-to-tr transition-colors min-w-[150px] max-w-xs
+            ${labelGradients[selected]} duration-200`}
+          value={selected}
+          onChange={e => setSelected(e.target.value)}
+          aria-label="Select a label"
+        >
+          {aiLabels.map(lbl => (
+            <option
+              key={lbl.value}
+              value={lbl.value}
+              className="font-semibold"
+              style={{
+                color: "#291b1b",
+                background: "linear-gradient(to top right, #fffbe8 0%, #ffe0ee 50%, #e8f8ff 100%)"
+              }}
             >
-              {aiLabels.map(lbl => (
-                <option
-                  key={lbl.value}
-                  value={lbl.value}
-                  className="font-semibold"
-                  style={{
-                    color: "#291b1b",
-                    background: "linear-gradient(to top right, #fffbe8 0%, #ffe0ee 50%, #e8f8ff 100%)"
-                  }}
+              {lbl.text}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* Quotes & Images grid */}
+      <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-8 items-start justify-center"
+           style={{ alignItems: "start" }}
+      >
+        {/* LEFT: 4 quotes/messages */}
+        <section className="flex flex-col gap-2 md:gap-3 mt-0 md:mt-1 w-full md:w-[95%]">
+          {fourMessages.map(
+            (msg, idx) =>
+              msg && (
+                <div
+                  className="bg-white/85 rounded-xl md:rounded-2xl px-4 py-2  text-[0.99rem] md:text-lg text-gray-800 font-playfair border border-gray-200 shadow"
+                  key={idx}
                 >
-                  {lbl.text}
-                </option>
-              ))}
-            </select>
-          </div>
-          {/* 4 messages */}
-          <div className="flex flex-col gap-2 w-full">
-            {fourMessages.map(
-              (msg, idx) =>
-                msg && (
-                  <div
-                    className="bg-white/85 rounded-lg px-4 py-2 text-base text-gray-800 font-playfair border border-gray-200 shadow"
-                    key={idx}
-                  >
-                    {msg}
-                  </div>
-                )
-            )}
-          </div>
+                  {msg}
+                </div>
+              )
+          )}
         </section>
 
-        {/* RIGHT: Images grid */}
-        <section className="flex flex-col gap-3 md:gap-4">
+        {/* RIGHT: Images stack */}
+        <section className="flex flex-col gap-4 items-center w-full md:w-[99%] mt-2 md:mt-0">
           {/* Main image */}
           {mainImage && (
             <div
-              className="rounded-2xl overflow-hidden border border-white/60 shadow-xl h-[340px] w-full max-w-[340px] mx-auto bg-white/60 aspect-square flex justify-center items-center"
+              className="
+                rounded-2xl overflow-hidden border border-white/60 shadow-xl
+                bg-white/60 aspect-square flex justify-center items-center
+                w-[90vw] h-[90vw]
+                sm:w-[390px] sm:h-[390px]
+                md:w-[420px] md:h-[420px]
+                lg:w-[480px] lg:h-[480px]
+                max-w-[95vw] md:max-w-[480px] mx-auto
+                "
             >
               <img
                 src={mainImage}
                 alt="Main generated"
                 className="w-full h-full object-cover object-center"
+                draggable={false}
                 style={{
                   maxWidth: "100%",
                   maxHeight: "100%",
                   aspectRatio: "1 / 1"
                 }}
-                draggable={false}
               />
             </div>
           )}
-          {/* Extra images in a grid */}
-          <div className="grid grid-cols-4 gap-2 md:gap-3">
+          {/* Extra images grid */}
+          <div
+            className="
+              grid grid-cols-4 gap-2 md:gap-3 w-full
+              "
+          >
             {extraImages.map((img, i) => (
               <div
                 key={i}
-                className="rounded-xl overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform h-[84px] w-[84px] md:h-[110px] md:w-[110px]"
+                className="
+                  rounded-xl overflow-hidden border border-white/50 shadow bg-white/80 aspect-square flex items-center justify-center cursor-pointer hover:scale-105 transition-transform
+                  h-[18vw] w-[18vw]
+                  sm:h-[70px] sm:w-[70px]
+                  md:h-[130px] md:w-[130px]
+                  lg:h-[142px] lg:w-[142px]
+                  min-h-0
+                "
                 style={{ minHeight: 0 }}
                 onClick={() => handleExtraImageClick(i)}
                 tabIndex={0}
