@@ -70,7 +70,7 @@ export const Workbench: React.FC = () => {
           {/* Prompt bar */}
           <div className="flex rounded-2xl shadow border font-semibold text-lg text-gray-900 bg-gradient-to-tr from-white via-white/90 to-white px-3 py-4 items-center w-full">
             <span className="text-base md:text-lg mr-3 select-none font-medium">
-              Get me an image for
+              I need an image for
             </span>
             <select
               className={`rounded-xl px-4 py-2 border-none font-bold text-base outline-none ml-2
