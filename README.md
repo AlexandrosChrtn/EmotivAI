@@ -9,6 +9,25 @@ Play around with the project [here](https://e-motivai.lovable.app)
 ## Info
 A slick UI for a website with images with quotes imprinted on them. Can be used as a starting point. Supports a workbench demo that would be available to the users and it has this cozy "hygge" theme all around. I have a similar project deployed [here](https://www.melpogram.com), one of my first creations with lovable.
 
+## How to run locally
+
+1. Navigate to the project directory:
+   ```bash
+   cd e-motivai
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and go to `http://localhost:8080`
+
 ## This project is built with:
 
 - Vite
