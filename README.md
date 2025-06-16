@@ -1,58 +1,15 @@
-# Welcome to your Lovable project
+# EmotivAI
+Play around with the project [here](https://e-motivai.lovable.app)
 
-## Project info
+## Demo
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/2068efc2-5f82-4ac6-ae7c-9a22fd0b5cce" width="600" alt="EmotivAI Demo">
+</div>
 
-**URL**: https://lovable.dev/projects/e6ff7a51-f679-456d-81fc-0913ffd5a494
+## Info
+A slick UI for a website with images with quotes imprinted on them. Can be used as a starting point. Supports a workbench demo that would be available to the users and it has this cozy "hygge" theme all around. I have a similar project deployed [here](https://www.melpogram.com), one of my first creations with lovable.
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/e6ff7a51-f679-456d-81fc-0913ffd5a494) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
+## This project is built with:
 
 - Vite
 - TypeScript
@@ -60,14 +17,6 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Credits
 
-Simply open [Lovable](https://lovable.dev/projects/e6ff7a51-f679-456d-81fc-0913ffd5a494) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Amazing team at [Lovable](https://www.lovable.dev) gave everyone unlimited access, for their AI showdown. Almost every prompt was handled by OpenAI.
